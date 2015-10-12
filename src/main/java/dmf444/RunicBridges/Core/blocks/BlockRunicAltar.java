@@ -25,6 +25,7 @@ public class BlockRunicAltar extends BlockContainer{
         } else if(true){
             if(!world.isRemote) {
                 TileRunicAltar te = (TileRunicAltar) world.getTileEntity(x, y, z);
+                te.syncTo(world, x, y, z);
                 player.addChatComponentMessage(new ChatComponentText("Render: " + TileRunicAltar.RuneType.values()[te.getRuneType()]));
                 te.createRune(player);
             }
