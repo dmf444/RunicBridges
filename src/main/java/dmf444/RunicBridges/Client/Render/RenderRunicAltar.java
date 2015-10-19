@@ -53,11 +53,17 @@ public class RenderRunicAltar extends TileEntitySpecialRenderer {
                     GL11.glPopMatrix();
 
                 GL11.glPushMatrix();
-                this.colorize(TileRunicAltar.RuneType.getRune(((TileRunicAltar) te).getRuneType()-1));
+                GL11.glEnable(GL11.GL_LIGHTING);
+                int j = this.colorize(TileRunicAltar.RuneType.getRune(((TileRunicAltar) te).getRuneType()-1));
+                float f1 = (float)(j >> 16 & 255) / 255.0F;
+                float f2 = (float)(j >> 8 & 255) / 255.0F;
+                float f3 = (float)(j & 255) / 255.0F;
+                GL11.glColor4f(f1 * 1.0F, f2 *  1.0F, f3 *  1.0F, 1.0F);
                 Minecraft.getMinecraft().renderEngine.bindTexture(GuiLib.TextureRAc);
                 GL11.glScalef(3F, 3F, 3F);
                 GL11.glTranslatef(0.23F, 0F, 0.1F);
                 this.RAmodel2.render();
+                GL11.glDisable(GL11.GL_LIGHTING);
                 GL11.glPopMatrix();
 
                 GL11.glPopMatrix();
@@ -66,29 +72,24 @@ public class RenderRunicAltar extends TileEntitySpecialRenderer {
     }
 
 
-    private void colorize(TileRunicAltar.RuneType rune){
+    private int colorize(TileRunicAltar.RuneType rune){
         switch (rune){
             case FIRE:
-                GL11.glColor3f(255, 0, 0);
-                break;
+                return 11743532; //DONE
             case AIR:
-                GL11.glColor3f(255, 255, 102);
-                break;
+                return 16777200; //DONE
             case MIND:
-                GL11.glColor3f(204, 102, 0);
-                break;
+                return 3887386; //DONE
             case WATER:
-                GL11.glColor3f(0, 0, 208);
-                break;
+                return 2508683; //DONE
             case EARTH:
-                GL11.glColor3f(134, 128, 105);
-                break;
+                return 11229501; //DONE
             case BODY:
-                GL11.glColor3f(255, 229, 204);
-                break;
+                return 12903679; //DONE
+            case COSMIC:
+                return 5243047;
             default:
-                GL11.glColor3f(0, 0, 0);
-                break;
+                return 197379;
         }
     }
 

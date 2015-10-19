@@ -25,4 +25,6 @@ public class Pos {
     public static void setX(int x) { position[0] = x;}
     public static void setY(int y) { position[1] = y;}
     public static void setZ(int z) { position[2] = z;}
+
+    public static void debugCoords(){RBLog.fatal("X:" +position[0] + " Y:" + position[1]+ " Z:"+ position[2]);}
 }

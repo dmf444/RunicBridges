@@ -1,10 +1,18 @@
 package dmf444.RunicBridges.Core.blocks.tileentity;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import dmf444.RunicBridges.Core.blocks.BlockRunicAltar;
+import dmf444.RunicBridges.Core.init.BlockLoader;
 import dmf444.RunicBridges.Core.init.ItemLoader;
 import dmf444.RunicBridges.Core.items.RuneEssence;
+import dmf444.RunicBridges.Core.network.PacketManager;
+import dmf444.RunicBridges.Core.network.PacketSpawnRune;
 import dmf444.RunicBridges.Core.utils.Pos;
+import dmf444.RunicBridges.Core.utils.RBLog;
+import net.minecraft.client.particle.EntityExplodeFX;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -25,8 +33,9 @@ public class TileRunicAltar extends TileEntity{
     private int runeType;
     public static boolean animate;
     public static int ticks=0;
-    private static int Stacksize;
-    private static Pos blockpos;
+    private static ItemStack stackl;
+    private Pos blockpos;
+    private Pos rootPos;
 
     public TileRunicAltar(){
         display = false;
@@ -36,6 +45,7 @@ public class TileRunicAltar extends TileEntity{
             carl = 0;
         }
         runeType = RuneType.getRandomType(carl).typerune;
+        rootPos = new Pos(this.xCoord, this.yCoord, this.zCoord);
     }
 
     public void displayTable(){
@@ -53,18 +63,22 @@ public class TileRunicAltar extends TileEntity{
         if(tile instanceof TileRunicAltar){
             TileRunicAltar tileRunicAltar = (TileRunicAltar) tile;
             this.runeType = tileRunicAltar.getRuneType();
-            blockpos = new Pos(x, y, z);
+            this.rootPos = new Pos(x, y, z);
             return true;
         }
         return false;
     }
 
-    public void createRune(EntityPlayer player){
+    public void createRune(EntityPlayer player, Pos pl){
         ItemStack stack = player.inventory.getCurrentItem();
-        if(stack.getItem() instanceof RuneEssence){
-            player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
-            Stacksize = stack.stackSize;
-            animate = true;
+        if(stack != null) {
+            if (stack.getItem() instanceof RuneEssence) {
+                player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
+                //pl.debugCoords();
+                blockpos = pl;
+                stackl = new ItemStack(ItemLoader.rune, stack.stackSize, this.getRuneType());
+                animate = true;
+            }
         }
     }
 
@@ -73,18 +87,11 @@ public class TileRunicAltar extends TileEntity{
         if(animate){
             ticks++;
             //System.out.println(ticks);
-                if(ticks > 360){
-                EntityItem item = new EntityItem(getWorldObj(), blockpos.getX(), blockpos.getY(), blockpos.getZ(), new ItemStack(Items.apple, Stacksize));//ItemStack(ItemLoader.rune, Stacksize, this.runeType)
-                System.out.println("X:" + blockpos.getX() + " Y:" + blockpos.getY() + " Z:" + blockpos.getZ() + "STACK:" +Stacksize);
-                if(!getWorldObj().isRemote){
-
-                    getWorldObj().spawnEntityInWorld(item);
-                }
-                Stacksize = 0;
+            if(ticks > 360){
+                PacketManager.network.sendToServer(new PacketSpawnRune(stackl, blockpos.getX(), blockpos.getY(), blockpos.getZ()));
                 ticks = 0;
                 animate = false;
             }
-
         }
     }
 

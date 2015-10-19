@@ -5,4 +5,5 @@ package dmf444.RunicBridges.Core.Lib;
  */
 public class BlockLib {
     public static final String bRunicAltar = "runicaltar";
+    public static final String bRuneEssence = "runeEssenceBlock";
 }

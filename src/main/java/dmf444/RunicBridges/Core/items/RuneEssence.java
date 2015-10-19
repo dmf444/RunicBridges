@@ -1,6 +1,7 @@
 package dmf444.RunicBridges.Core.items;
 
 import dmf444.RunicBridges.Core.Lib.ItemLib;
+import dmf444.RunicBridges.Core.Lib.ModInfo;
 import dmf444.RunicBridges.RunicBridges;
 import net.minecraft.item.Item;
 
@@ -13,6 +14,7 @@ public class RuneEssence extends Item{
         super();
         this.setCreativeTab(RunicBridges.tab);
         this.setUnlocalizedName(ItemLib.runeEssence);
+        this.setTextureName(ModInfo.MODID + ":"+ ItemLib.runeEssence);
     }
 
 

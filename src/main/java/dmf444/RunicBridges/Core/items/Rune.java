@@ -3,6 +3,7 @@ package dmf444.RunicBridges.Core.items;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import dmf444.RunicBridges.Core.Lib.ItemLib;
+import dmf444.RunicBridges.Core.Lib.ModInfo;
 import dmf444.RunicBridges.RunicBridges;
 import net.minecraft.block.BlockColored;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -61,7 +62,7 @@ public class Rune extends Item{
 
         for (int i = 0; i < runeTypes.length; ++i)
         {
-            this.iconArray[i] = regex.registerIcon(this.getIconString() + "_" + runeTypes[i]);
+            this.iconArray[i] = regex.registerIcon(ModInfo.MODID + ":"+ItemLib.runes + "_" + runeTypes[i]);
         }
     }
 

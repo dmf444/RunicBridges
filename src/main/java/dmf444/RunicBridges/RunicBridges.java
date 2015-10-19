@@ -10,6 +10,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import dmf444.RunicBridges.Core.Generation.RunicGenerationManager;
 import dmf444.RunicBridges.Core.init.BlockLoader;
 import dmf444.RunicBridges.Core.init.ItemLoader;
+import dmf444.RunicBridges.Core.network.PacketManager;
 import net.minecraft.creativetab.CreativeTabs;
 
 @Mod(modid = ModInfo.MODID, name=ModInfo.Mname, version = ModInfo.VERSION)
@@ -30,6 +31,8 @@ public class RunicBridges
     {
         BlockLoader.initiateBlocks();
         ItemLoader.initiateItems();
+
+        PacketManager.init();
         GameRegistry.registerWorldGenerator(new RunicGenerationManager(), 0);
 
     }
