@@ -1,6 +1,6 @@
 package com.example.examplemod;
 
-import hardcorequesting.quests.Quest;
+//import hardcorequesting.quests.Quest;
 import net.minecraft.init.Blocks;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;

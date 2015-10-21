@@ -12,8 +12,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import java.util.Random;
-
 /**
  * Created by dmf444 on 10/18/2015.
  */
@@ -22,14 +20,14 @@ public class RuneEssenceBlock extends Block {
     public RuneEssenceBlock(){
         super(Material.rock);
         this.setCreativeTab(RunicBridges.tab);
-        this.setHardness(2.0F);
+        this.setHardness(0.0F);
         this.setBlockTextureName(ModInfo.MODID + ":"+ BlockLib.bRuneEssence);
     }
 
 
     public void breakBlock(World world, int x, int y, int z, Block block, int meta){
         super.breakBlock(world, x, y, z, block, meta);
-        if(false) {
+        if(true) {
             if (block.equals(BlockLoader.runeBlock)) {
                 if (!world.isRemote)
                     world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(this.getItemDropped())));
