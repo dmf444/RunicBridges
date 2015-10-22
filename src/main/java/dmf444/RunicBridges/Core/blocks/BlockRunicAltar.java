@@ -31,6 +31,7 @@ public class BlockRunicAltar extends BlockContainer{
                // te.syncTo(world, x, y, z);
             player.addChatComponentMessage(new ChatComponentText("Render: " + TileRunicAltar.RuneType.values()[te.getRuneType()]));
                te.createRune(player, new Pos(x,y,z));
+
         }
         return false;
     }
