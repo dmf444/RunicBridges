@@ -16,7 +16,7 @@ public class WorldProviderRuneEssence extends WorldProvider{
         this.dimensionId = -4412;
     }
 
-    public IChunkProvider createChunkGeneration(){
+    public IChunkProvider createChunkGenerator() {
         return new ChunkProviderRuneEssenceMine(worldObj, worldObj.getSeed());
     }
 

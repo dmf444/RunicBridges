@@ -94,7 +94,7 @@ public class ChunkProviderRuneEssenceMine implements IChunkProvider{
 
             }
         }
-
+        chunk.generateSkylightMap();
         return chunk;
     }
 
