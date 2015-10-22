@@ -2,6 +2,7 @@ package dmf444.RunicBridges;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import dmf444.RunicBridges.Core.CommonProxy;
+import dmf444.RunicBridges.Core.Generation.RuneMine.DimBiomReg;
 import dmf444.RunicBridges.Core.Lib.ModInfo;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -31,6 +32,8 @@ public class RunicBridges
     {
         BlockLoader.initiateBlocks();
         ItemLoader.initiateItems();
+        DimBiomReg.registerBiome();
+        DimBiomReg.registerDimension();
 
         PacketManager.init();
         GameRegistry.registerWorldGenerator(new RunicGenerationManager(), 0);
