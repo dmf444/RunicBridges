@@ -23,6 +23,10 @@ public class ChunkProviderRuneEssenceMine implements IChunkProvider{
     private World worldObj;
     private Random random;
 
+
+
+
+
     public ChunkProviderRuneEssenceMine(World p, long a){
         worldObj = p;
         random = new Random(a);
