@@ -59,6 +59,7 @@ public class RuneEssenceBlock extends Block {
             if (block.equals(BlockLoader.runeBlock)) {
                 if (!world.isRemote)
                     world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(this.getItemDropped())));
+                world.spawnParticle("blockdust_"+BlockLib.bRuneEssence+"_0", x,y,z,x,y,z);
                 world.setBlock(x, y, z, BlockLoader.runeBlock);
             }
         }
