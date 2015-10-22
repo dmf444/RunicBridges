@@ -38,17 +38,17 @@ public class ChunkProviderRuneEssenceMine implements IChunkProvider{
         Chunk chunk = new Chunk(this.worldObj, p_73154_1_, p_73154_2_);
 
         int l;
-        if (p_73154_1_ >= -64 && p_73154_1_ <= 64 && p_73154_2_ >= -64 && p_73154_2_ <= 64  ) {
+        if (p_73154_1_ >= -4 && p_73154_1_ <= 4 && p_73154_2_ >= -4 && p_73154_2_ <= 4  ) {
             for (int k = 0; k < 64; ++k) {
                 Block block;
-                if (k < 16) {
+                if (k <= 16) {
                     block = Blocks.stone;
                 }
                 else if (k > 16 && k < 63){
                     block = Blocks.air;
                 }
                 else {
-                    block = Blocks.glowstone;
+                    block = Blocks.dirt;
                 }
                 l = k >> 4;
                 ExtendedBlockStorage extendedblockstorage = chunk.getBlockStorageArray()[l];

@@ -14,6 +14,7 @@ public class WorldProviderRuneEssence extends WorldProvider{
     protected void registerWorldChunkManager() {
         this.worldChunkMgr = new WorldChunkManagerHell(DimBiomReg.biome, 0f);
         this.dimensionId = -4412;
+
     }
 
     public IChunkProvider createChunkGenerator() {
