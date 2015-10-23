@@ -1,6 +1,7 @@
 package dmf444.RunicBridges.Core.init;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import dmf444.RunicBridges.Core.items.LeaveDimensionToken;
 import dmf444.RunicBridges.Core.items.Rune;
 import dmf444.RunicBridges.Core.items.RuneEssence;
 import net.minecraft.item.Item;
@@ -18,12 +19,14 @@ public class ItemLoader  {
 
     public static Item rune;
     public static Item runeEssence;
+    public static Item leaveToken;
 
     public static Map<String, Item> RunicItems = new HashMap<>();
 
     public static void initiateItems() {
         rune = new Rune();
         runeEssence = new RuneEssence();
+        leaveToken = new LeaveDimensionToken();
 
 
 

@@ -5,6 +5,7 @@ import dmf444.RunicBridges.Core.Lib.BlockLib;
 import dmf444.RunicBridges.Core.Lib.ModInfo;
 import dmf444.RunicBridges.Core.init.BlockLoader;
 import dmf444.RunicBridges.Core.init.ItemLoader;
+import dmf444.RunicBridges.Core.items.LeaveDimensionToken;
 import dmf444.RunicBridges.RunicBridges;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -14,7 +15,6 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 
 /**
@@ -32,6 +32,9 @@ public class RuneEssenceBlock extends Block {
 
     public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity){
         if(entity.ridingEntity == null && entity.riddenByEntity == null && entity instanceof EntityPlayerMP){
+
+
+
             EntityPlayerMP thePlayer = (EntityPlayerMP) entity;
 
             MinecraftServer server = MinecraftServer.getServer();
@@ -40,12 +43,13 @@ public class RuneEssenceBlock extends Block {
                     thePlayer.timeUntilPortal = 10;
 
                 }else if(thePlayer.dimension != -4412){
+                    thePlayer.inventory.addItemStackToInventory(LeaveDimensionToken.createLeaveToken(thePlayer));
                     thePlayer.timeUntilPortal = 10;
                     thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, -4412, new TeleporterRuneEssenceMine(server.worldServerForDimension(-4412)));
 
                 }else{
                     thePlayer.timeUntilPortal = 10;
-                    thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, 0, new Teleporter(server.worldServerForDimension(0)));
+                    thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, 0, new TeleporterRuneEssenceMine(server.worldServerForDimension(0)));
                 }
 
             }

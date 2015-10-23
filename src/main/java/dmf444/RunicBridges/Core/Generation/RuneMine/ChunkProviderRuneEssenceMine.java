@@ -32,9 +32,38 @@ public class ChunkProviderRuneEssenceMine implements IChunkProvider{
         random = new Random(a);
     }
 
+    private void makeWall(int x, int z, Chunk c, Block b){
+        int l;
+        for (int i = 8; i < 32; i++){
+            l = i >> 4;
+            ExtendedBlockStorage e = c.getBlockStorageArray()[l];
+
+            if (e == null)
+            {
+                e = new ExtendedBlockStorage(i, !this.worldObj.provider.hasNoSky);
+                c.getBlockStorageArray()[l] = e;
+            }
+            e.func_150818_a(x, i & 15, z, b);
+            e.setExtBlockMetadata(x, i & 15, z, 0);
+        }
+    }
+
     @Override
     public boolean chunkExists(int p_73149_1_, int p_73149_2_) {
         return true;
+    }
+
+    public void makeWall(int x, int z, Chunk c){
+        makeWall(Math.abs(x) % 15, Math.abs(z) % 15, c, Blocks.stone);
+    }
+
+    public boolean insideChunk(int cx, int cy, int px, int pz){
+        int c = (int)px / 16;
+        int abc = (int)pz / 16;
+        if (c == cx && abc == cy){
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -43,12 +72,28 @@ public class ChunkProviderRuneEssenceMine implements IChunkProvider{
 
         int l;
         if (p_73154_1_ >= -4 && p_73154_1_ <= 4 && p_73154_2_ >= -4 && p_73154_2_ <= 4  ) {
-            for (int k = 0; k < 64; ++k) {
+
+            for (int wall1x = -17; wall1x < 19; wall1x++){
+                for (int wall1y = -19; wall1y < 20; wall1y++){
+                    if (insideChunk(p_73154_1_, p_73154_2_, wall1x, wall1y)){
+                        this.makeWall(Math.abs(wall1x) % 15, Math.abs(wall1y) % 15, chunk);
+                    }
+                }
+            }
+            for (int wall1x = -16; wall1x < 18; wall1x++){
+                for (int wall1y = -18; wall1y < 19; wall1y++){
+                    if (insideChunk(p_73154_1_, p_73154_2_, wall1x, wall1y)){
+                        this.makeWall(wall1x, wall1y, chunk, Blocks.air);
+                    }
+                }
+            }
+
+            for (int k = 0; k < 32; ++k) {
                 Block block;
-                if (k <= 16) {
+                if (k <= 8) {
                     block = Blocks.stone;
                 }
-                else if (k > 16 && k < 63){
+                else if (k > 8 && k < 31){
                     block = Blocks.air;
                 }
                 else {
@@ -67,6 +112,7 @@ public class ChunkProviderRuneEssenceMine implements IChunkProvider{
                 {
                     for (int j1 = 0; j1 < 16; ++j1)
                     {
+
                         extendedblockstorage.func_150818_a(i1, k & 15, j1, block);
                         extendedblockstorage.setExtBlockMetadata(i1, k & 15, j1, 0);
                     }
@@ -75,7 +121,7 @@ public class ChunkProviderRuneEssenceMine implements IChunkProvider{
             }
         }
         else {
-            for (int k = 0; k < 64; ++k) {
+            for (int k = 0; k < 32; ++k) {
                 Block block  = Blocks.stone;
 
                 l = k >> 4;

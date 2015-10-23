@@ -1,6 +1,9 @@
 package dmf444.RunicBridges.Core.Generation.RuneMine;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.LongHashMap;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
@@ -40,9 +43,32 @@ public class TeleporterRuneEssenceMine extends Teleporter {
 
     @Override
     public void placeInPortal(Entity par1, double par2, double par4, double par6, float par7) {
-
+        if (this.worldServerInstance.provider.dimensionId == -4412) {
             par1.setLocationAndAngles(0.0d, 18.0d, 0.0d, par1.rotationYaw, 0.0F);
             par1.motionX = par1.motionY = par1.motionZ = 0.0D;
+        }
+        else{
+            EntityPlayer entityPlayer = (EntityPlayer)par1;
 
+            ItemStack leaveToken = entityPlayer.inventory.getCurrentItem();
+            NBTTagCompound position = leaveToken.getTagCompound();
+
+            double x = (double)position.getInteger("X");
+            double y = (double)position.getInteger("Y");
+            double z = (double)position.getInteger("Z");
+            entityPlayer.inventory.decrStackSize(entityPlayer.inventory.currentItem, leaveToken.stackSize);
+
+            par1.setLocationAndAngles(x, y, z, par1.rotationYaw, 0.0F);
+            par1.motionX = par1.motionY = par1.motionZ = 0.0D;
+
+        }
+
+
+    }
+
+    @Override
+    public boolean placeInExistingPortal(Entity p_77184_1_, double p_77184_2_, double p_77184_4_, double p_77184_6_, float p_77184_8_) {
+        placeInPortal(p_77184_1_, p_77184_2_, p_77184_4_, p_77184_6_, p_77184_8_);
+        return true;
     }
 }
