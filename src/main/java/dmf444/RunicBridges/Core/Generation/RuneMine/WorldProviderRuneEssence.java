@@ -36,6 +36,11 @@ public class WorldProviderRuneEssence extends WorldProvider{
     }
 
     @Override
+    public double getVoidFogYFactor() {
+        return 1.0D;
+    }
+
+    @Override
     public Vec3 getSkyColor(Entity cameraEntity, float partialTicks) {
         return Vec3.createVectorHelper(1.0d, 1.0d, 1.0d);
     }
