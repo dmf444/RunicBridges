@@ -4,6 +4,8 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import dmf444.RunicBridges.Core.Lib.BlockLib;
 import dmf444.RunicBridges.Core.blocks.BlockRunicAltar;
 import dmf444.RunicBridges.Core.blocks.RuneEssenceBlock;
+import dmf444.RunicBridges.Core.blocks.RuneTeleportationBlock;
+import dmf444.RunicBridges.Core.blocks.tileentity.TileRuneTeleportation;
 import dmf444.RunicBridges.Core.blocks.tileentity.TileRunicAltar;
 import net.minecraft.block.Block;
 
@@ -14,6 +16,7 @@ public class BlockLoader {
 
         public static Block runicAltar;
         public static Block runeBlock;
+        public static Block runeTeleporter;
 
 
         public static boolean Register=false;
@@ -21,6 +24,7 @@ public class BlockLoader {
         public static void initiateBlocks() {
             runicAltar = new BlockRunicAltar().setBlockName(BlockLib.bRunicAltar);
             runeBlock = new RuneEssenceBlock().setBlockName(BlockLib.bRuneEssence);
+            runeTeleporter = new RuneTeleportationBlock().setBlockName(BlockLib.bTeleport);
 
 
             registerBlocks();
@@ -29,6 +33,7 @@ public class BlockLoader {
             if(!Register){
                 GameRegistry.registerBlock(runicAltar, BlockLib.bRunicAltar);
                 GameRegistry.registerBlock(runeBlock, BlockLib.bRuneEssence);
+                GameRegistry.registerBlock(runeTeleporter, BlockLib.bTeleport);
 
 
             }
@@ -37,6 +42,7 @@ public class BlockLoader {
 
         public static void initTileEntity() {
             GameRegistry.registerTileEntity(TileRunicAltar.class, BlockLib.bRunicAltar);
+            GameRegistry.registerTileEntity(TileRuneTeleportation.class, BlockLib.bTeleport);
 
         }
 

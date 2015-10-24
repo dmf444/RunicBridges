@@ -1,6 +1,7 @@
 package dmf444.RunicBridges.Core.blocks;
 
 import dmf444.RunicBridges.Core.Lib.BlockLib;
+import dmf444.RunicBridges.Core.blocks.tileentity.TileRuneTeleportation;
 import dmf444.RunicBridges.Core.items.LeaveDimensionToken;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -53,6 +54,22 @@ public class RuneTeleportationBlock extends BlockContainer {
 
     @Override
     public TileEntity createNewTileEntity(World world, int side) {
-        return null;
+        return new TileRuneTeleportation();
+    }
+
+    @Override
+    public int getRenderType() {
+        return -1;
+    }
+
+    //It's not an opaque cube, so you need this.
+    @Override
+    public boolean isOpaqueCube() {
+        return false;
+    }
+
+    //It's not a normal block, so you need this too.
+    public boolean renderAsNormalBlock() {
+        return false;
     }
 }

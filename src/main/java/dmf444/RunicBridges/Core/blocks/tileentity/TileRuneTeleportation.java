@@ -7,7 +7,22 @@ import net.minecraft.tileentity.TileEntity;
  */
 public class TileRuneTeleportation extends TileEntity{
 
+
+    public int ticks, scot;
+
     public TileRuneTeleportation(){
         //DO NOTHING FOR THINGS
+    }
+
+    public void updateEntity(){
+        ticks++;
+
+        if(ticks > 20){
+            scot++;
+            ticks = 0;
+        }
+        if(scot > 20){
+            scot = 0;
+        }
     }
 }
