@@ -55,10 +55,15 @@ public class RenderTeleporter extends TileEntitySpecialRenderer{
             GL11.glEnable(GL11.GL_LIGHTING);
                 GL11.glTranslatef(0F, -1.5F, 0F);
             TileRuneTeleportation tilez = (TileRuneTeleportation) tile;
-            this.model.shape21.rotateAngleY += -Math.sin(tilez.scot);
-            this.model.shape22.rotateAngleY += -Math.sin(tilez.scot);
-            this.model.shape23.rotateAngleY += -Math.sin(tilez.scot);
-            this.model.shape24.rotateAngleY += -Math.sin(tilez.scot);
+            double carl = Math.sin(5* tilez.ticks) + 3.5;
+            this.model.shape21.rotateAngleY += (tilez.scot);
+            this.model.shape21.rotationPointY = (float) carl;
+            this.model.shape22.rotateAngleY += (tilez.scot);
+            this.model.shape22.rotationPointY = (float) carl;
+            this.model.shape23.rotateAngleY += (tilez.scot);
+            this.model.shape23.rotationPointY = (float) carl;
+            this.model.shape24.rotateAngleY += (tilez.scot);
+            this.model.shape24.rotationPointY = (float) carl;
 
                 this.model.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
             GL11.glDisable(GL11.GL_BLEND);

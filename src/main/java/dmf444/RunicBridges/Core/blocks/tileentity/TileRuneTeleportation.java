@@ -21,7 +21,7 @@ public class TileRuneTeleportation extends TileEntity{
             scot++;
             ticks = 0;
         }
-        if(scot > 20){
+        if(scot > 3){
             scot = 0;
         }
     }
