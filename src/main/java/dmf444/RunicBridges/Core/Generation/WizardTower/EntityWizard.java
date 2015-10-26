@@ -11,6 +11,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
 import net.minecraft.world.World;
@@ -29,6 +30,7 @@ public class EntityWizard extends EntityVillager{
         allowTeleport = false;
     }
 
+    @Override
     public boolean interact(EntityPlayer player) {
         ItemStack itemstack = player.inventory.getCurrentItem();
         boolean flag = itemstack != null && itemstack.getItem() == Items.spawn_egg;
@@ -47,18 +49,25 @@ public class EntityWizard extends EntityVillager{
                             thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, -4412, new TeleporterRuneEssenceMine(server.worldServerForDimension(-4412)));
                         }
                     }
-                } else {
-                    if (!this.worldObj.isRemote) {
-                        this.setCustomer(player);
-                        player.displayGUIMerchant(this, this.getCustomNameTag());
-                    }
                 }
                 return true;
             } else {
-                return super.interact(player);
+                if(itemstack != null) {
+                    if (itemstack.getItem().equals(Items.emerald) && itemstack.stackSize >= 5) {
+                        itemstack.stackSize -= 5;
+                        this.allowTeleport = true;
+                        if (!this.worldObj.isRemote) {
+                            player.addChatComponentMessage(new ChatComponentText("[Great Wizard] Thank you for your payment. You may now teleport to the Rune Essence Mine by right-clicking me again!"));
+                        }
+                    }
+                }else{
+                    if (!this.worldObj.isRemote) {
+                        player.addChatComponentMessage(new ChatComponentText("[Great Wizard] Payment must first be made before I can teleport you to the Rune Essence Mine. Please have 5 emeralds in your hand and right-click me again!"));
+                    }
+                }
             }
         }
-        return super.interact(player);
+        return false;
     }
 
     public void writeEntityToNBT(NBTTagCompound tag)
@@ -71,15 +80,6 @@ public class EntityWizard extends EntityVillager{
     {
         super.readEntityFromNBT(tag);
         allowTeleport = tag.getBoolean("teleport");
-    }
-    public void useRecipe(MerchantRecipe merchRecipe)
-    {
-        merchRecipe.func_82783_a(-6);
-        merchRecipe.incrementToolUses();
-        this.allowTeleport = true;
-        //super.useRecipe(merchRecipe);
-
-
     }
 
     public static class TradeHandler implements VillagerRegistry.IVillageTradeHandler {

@@ -1,5 +1,6 @@
 package dmf444.RunicBridges.Core.Generation.WizardTower;
 
+import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 
 /**
@@ -8,7 +9,7 @@ import cpw.mods.fml.common.registry.VillagerRegistry;
 public class WizardInit {
 
     public static void init(){
-        //EntityRegistry.registerGlobalEntityID(EntityWizard.class, "teleportWizard",EntityRegistry.findGlobalUniqueEntityId());
+        EntityRegistry.registerGlobalEntityID(EntityWizard.class, "teleportWizard", EntityRegistry.findGlobalUniqueEntityId());
         VillagerRegistry.instance().registerVillageTradeHandler(4412, EntityWizard.TradeHandler.INSTANCE);
     }
 }
