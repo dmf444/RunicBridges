@@ -1,5 +1,6 @@
 package dmf444.RunicBridges.Core.blocks;
 
+import dmf444.RunicBridges.Core.Generation.RuneMine.TeleporterRuneEssenceMine;
 import dmf444.RunicBridges.Core.Lib.BlockLib;
 import dmf444.RunicBridges.Core.blocks.tileentity.TileRuneTeleportation;
 import dmf444.RunicBridges.Core.items.LeaveDimensionToken;
@@ -20,8 +21,9 @@ import net.minecraft.world.World;
 public class RuneTeleportationBlock extends BlockContainer {
 
     public RuneTeleportationBlock(){
-        super(Material.snow);
+        super(Material.craftedSnow);
         this.setBlockUnbreakable();
+        this.setHardness(2.0F);
         this.setBlockTextureName(BlockLib.bTeleport);
     }
 
@@ -29,23 +31,20 @@ public class RuneTeleportationBlock extends BlockContainer {
         if(entity instanceof EntityPlayer){
 
 
-            if (!(((EntityPlayer) entity).inventory.getCurrentItem().getItem() instanceof LeaveDimensionToken)) {
-                ((EntityPlayer) entity).addChatComponentMessage(new ChatComponentText("[Rune Mine Teleporter] Please hold your leave dimension token to leave."));
-                return;
-            }
-
             if(entity.ridingEntity == null && entity.riddenByEntity == null && entity instanceof EntityPlayerMP){
                 EntityPlayerMP thePlayer = (EntityPlayerMP) entity;
-
                 MinecraftServer server = MinecraftServer.getServer();
                 if(entity instanceof EntityPlayerMP){
                     if(thePlayer.timeUntilPortal > 0){
                         thePlayer.timeUntilPortal = 10;
-                    }else if(thePlayer.dimension == -4412){
+                    }else if(thePlayer.dimension != -4412){
+                        thePlayer.inventory.addItemStackToInventory(LeaveDimensionToken.createLeaveToken(thePlayer));
                         thePlayer.timeUntilPortal = 10;
-                        thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, 0, new Teleporter(server.worldServerForDimension(0)));
+                        thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, -4412, new TeleporterRuneEssenceMine(server.worldServerForDimension(-4412)));
+                    }else{
+                        thePlayer.timeUntilPortal = 10;
+                        thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, 0, new TeleporterRuneEssenceMine(server.worldServerForDimension(0)));
                     }
-
                 }
 
             }

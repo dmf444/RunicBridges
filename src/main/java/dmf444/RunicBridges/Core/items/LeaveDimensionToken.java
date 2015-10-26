@@ -1,5 +1,7 @@
 package dmf444.RunicBridges.Core.items;
 
+import dmf444.RunicBridges.Core.Lib.ItemLib;
+import dmf444.RunicBridges.Core.Lib.ModInfo;
 import dmf444.RunicBridges.Core.init.ItemLoader;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -13,7 +15,8 @@ import net.minecraft.nbt.NBTTagCompound;
 public class LeaveDimensionToken extends Item{
     public LeaveDimensionToken(){
         super();
-        this.setUnlocalizedName("leaveToken");
+        this.setUnlocalizedName(ItemLib.token);
+        this.setTextureName(ModInfo.MODID +":"+ItemLib.token);
 
     }
 

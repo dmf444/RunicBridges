@@ -25,7 +25,7 @@ public class RuneEssenceBlock extends Block {
     public RuneEssenceBlock(){
         super(Material.rock);
         this.setCreativeTab(RunicBridges.tab);
-        this.setHardness(0.0F);
+        this.setHardness(2.0F);
         this.setBlockTextureName(ModInfo.MODID + ":"+ BlockLib.bRuneEssence);
     }
 
@@ -43,7 +43,9 @@ public class RuneEssenceBlock extends Block {
                     thePlayer.timeUntilPortal = 10;
 
                 }else if(thePlayer.dimension != -4412){
-                    thePlayer.inventory.addItemStackToInventory(LeaveDimensionToken.createLeaveToken(thePlayer));
+                    if(thePlayer.inventory.getFirstEmptyStack() != -1) {
+                        thePlayer.inventory.addItemStackToInventory(LeaveDimensionToken.createLeaveToken(thePlayer));
+                    }
                     thePlayer.timeUntilPortal = 10;
                     thePlayer.mcServer.getConfigurationManager().transferPlayerToDimension(thePlayer, -4412, new TeleporterRuneEssenceMine(server.worldServerForDimension(-4412)));
 

@@ -7,4 +7,5 @@ public class ItemLib {
     
     public static final String runes = "rune";
     public static final String runeEssence = "runeEssence";
+    public static final String token = "leaveToken";
 }
