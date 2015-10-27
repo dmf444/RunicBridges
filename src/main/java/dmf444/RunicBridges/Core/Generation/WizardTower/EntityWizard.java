@@ -28,6 +28,7 @@ public class EntityWizard extends EntityVillager{
     public EntityWizard(World world) {
         super(world, 4412);
         allowTeleport = false;
+
     }
 
     @Override
