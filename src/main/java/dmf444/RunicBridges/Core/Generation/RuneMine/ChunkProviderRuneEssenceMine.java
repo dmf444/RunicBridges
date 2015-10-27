@@ -1,5 +1,6 @@
 package dmf444.RunicBridges.Core.Generation.RuneMine;
 
+import dmf444.RunicBridges.Core.init.BlockLoader;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
@@ -24,7 +25,13 @@ public class ChunkProviderRuneEssenceMine implements IChunkProvider{
     private Random random;
 
 
+    private final static int[][] roomPos;
 
+    static {
+        roomPos = new int[][] {
+                new int[] {}
+        };
+    }
 
 
     public ChunkProviderRuneEssenceMine(World p, long a){
@@ -87,7 +94,7 @@ public class ChunkProviderRuneEssenceMine implements IChunkProvider{
             for (int k = 0; k < 32; ++k) {
                 Block block;
                 if (k <= 8) {
-                    block = Blocks.stone;
+                    block = Blocks.snow;
                 }
                 else if (k > 8 && k < 31){
                     block = Blocks.air;
@@ -108,6 +115,9 @@ public class ChunkProviderRuneEssenceMine implements IChunkProvider{
                 {
                     for (int j1 = 0; j1 < 16; ++j1)
                     {
+                        if (p_73154_1_ == 0 && p_73154_2_ == 0 && i1 == 3 && j1 == 3 && k == 8){
+                            //block = (Block) BlockLoader.runeTeleporter;
+                        }
 
                         extendedblockstorage.func_150818_a(i1, k & 15, j1, block);
                         extendedblockstorage.setExtBlockMetadata(i1, k & 15, j1, 0);
@@ -157,27 +167,62 @@ public class ChunkProviderRuneEssenceMine implements IChunkProvider{
     }
 
 
+    private void setBlockInChunk(Chunk chunk, int x, int y, int z, Block b){
+        int l;
+        l = y >> 4;
+        ExtendedBlockStorage e = chunk.getBlockStorageArray()[l];
+
+        if (e == null)
+        {
+            e = new ExtendedBlockStorage(y, !this.worldObj.provider.hasNoSky);
+            chunk.getBlockStorageArray()[l] = e;
+        }
+        e.func_150818_a(x, y & 15, z, b);
+        e.setExtBlockMetadata(x, y & 15, z, 0);
+    }
+
     private void genFeaturesToChunk(Chunk chunk, int p_73154_1_, int p_73154_2_){
 
-        // Inner room.
 
 
-
-        for (int wall1x = -17; wall1x < 19; wall1x++){
-            for (int wall1y = -19; wall1y < 20; wall1y++){
-                if (insideChunk(p_73154_1_, p_73154_2_, wall1x, wall1y)){
-                    this.makeWall(toC(wall1x), toC(wall1y), chunk);
+            for (int i = -64; i > -62; i++){
+                for (int j = -64; j > -62; i++) {
+                    if (insideChunk(p_73154_1_, p_73154_2_, i, j)){
+                        this.setBlockInChunk(chunk, i, 8, j, BlockLoader.runeTeleporter);
+                    }
                 }
             }
-        }
-        for (int wall1x = -16; wall1x < 18; wall1x++){
-            for (int wall1y = -18; wall1y < 19; wall1y++){
-                if (insideChunk(p_73154_1_, p_73154_2_, wall1x, wall1y)){
-                    this.makeWall(toC(wall1x), toC(wall1y), chunk, Blocks.air);
+
+         // inner room
+
+            for (int wall1x = -17; wall1x < 19; wall1x++) {
+                for (int wall1y = -19; wall1y < 20; wall1y++) {
+                    if (insideChunk(p_73154_1_, p_73154_2_, wall1x, wall1y)) {
+                        this.makeWall(toC(wall1x), toC(wall1y), chunk);
+                    }
                 }
             }
-        }
+            for (int wall1x = -16; wall1x < 18; wall1x++) {
+                for (int wall1y = -18; wall1y < 19; wall1y++) {
+                    if (insideChunk(p_73154_1_, p_73154_2_, wall1x, wall1y)) {
+                        this.makeWall(toC(wall1x), toC(wall1y), chunk, Blocks.air);
+                    }
+                }
+            }
+
+
+         // outer rooms
+
+
+
+
     }
+
+
+    // generates wall things. use x
+
+
+
 
     @Override
     public boolean saveChunks(boolean p_73151_1_, IProgressUpdate p_73151_2_) {
