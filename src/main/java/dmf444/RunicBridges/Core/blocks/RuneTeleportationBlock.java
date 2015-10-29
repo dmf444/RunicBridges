@@ -23,7 +23,7 @@ public class RuneTeleportationBlock extends BlockContainer {
     public RuneTeleportationBlock(){
         super(Material.craftedSnow);
         this.setBlockUnbreakable();
-        this.setHardness(2.0F);
+        //this.setHardness(2.0F);
         this.setBlockTextureName(BlockLib.bTeleport);
     }
 
