@@ -25,18 +25,27 @@ public class ChunkProviderRuneEssenceMine implements IChunkProvider{
     private Random random;
 
 
-    private final static int[][] roomPos;
+    private int[][] roomPos;
+    private int[][] linePos;
 
-    static {
-        roomPos = new int[][] {
-                new int[] {}
-        };
-    }
 
 
     public ChunkProviderRuneEssenceMine(World p, long a){
         worldObj = p;
         random = new Random(a);
+
+        roomPos = new int[][] {
+                new int[] {45, -65, 80, -29},
+                new int[] {45, 45, 80, 80},
+                new int[] {-65, 45, -29, 80},
+                new int[] {-65, -65, -29, -29}
+        };
+        linePos = new int[][] {
+                new int[] {26, 27, 45, 45},
+                new int[] {-8, 27, -28, 45},
+                new int[] {-9, -10, -28, -28},
+                new int[] {-26, -10, 45, -28}
+        };
     }
 
     private int toC(int v){
@@ -50,7 +59,7 @@ public class ChunkProviderRuneEssenceMine implements IChunkProvider{
 
     private void makeWall(int x, int z, Chunk c, Block b){
         int l;
-        for (int i = 8; i < 31; i++){
+        for (int i = 9; i < 31; i++){
             l = i >> 4;
             ExtendedBlockStorage e = c.getBlockStorageArray()[l];
 
@@ -80,6 +89,52 @@ public class ChunkProviderRuneEssenceMine implements IChunkProvider{
             return true;
         }
         return false;
+    }
+
+    private void drawCorridor(boolean isX, int startX, int endX, int startY, int endY, Chunk c, int a, int b){
+        if (startX > endX){
+            int v = endX;
+            endX = startX;
+            startX = v;
+        }
+        if (startY > endY){
+            int v = endY;
+            endY = startY;
+            startY = v;
+        }
+        if (isX){
+
+            for (int x = startX; x <= endX; x ++){
+                for (int y = startY; y <= endY; y ++){
+                    if (x == startX || x == endX){
+                        if (insideChunk(a, b, x, y)){
+                            makeWall(toC(x), toC(y), c);
+                        }
+                    }
+                    else {
+                        if (insideChunk(a, b, x, y)){
+                            makeWall(toC(x), toC(y), c, Blocks.air);
+                        }
+                    }
+                }
+            }
+        }
+        else {
+            for (int x = startX; x <= endX; x ++){
+                for (int y = startY; y <= endY; y ++){
+                    if (y == startY || y == endY){
+                        if (insideChunk(a, b, x, y)){
+                            makeWall(toC(x), toC(y), c);
+                        }
+                    }
+                    else {
+                        if (insideChunk(a, b, x, y)){
+                            makeWall(toC(x), toC(y), c, Blocks.air);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     @Override
@@ -181,29 +236,119 @@ public class ChunkProviderRuneEssenceMine implements IChunkProvider{
         e.setExtBlockMetadata(x, y & 15, z, 0);
     }
 
+    public void sqaureAround(Chunk c, int a, int b, int x, int y){
+        for (int x1 = x-3; x1 < x+3; x1++){
+            for (int y1 = y-3; y1 < y+3; y1++){
+                if (insideChunk(a, b, x, y)){
+                    makeWall(toC(x1), toC(y1), c);
+                }
+            }
+        }
+        for (int x1 = x-2; x1 < x+2; x1++){
+            for (int y1 = y-2; y1 < y+2; y1++){
+                if (insideChunk(a, b, x, y)){
+                    makeWall(toC(x1), toC(y1), c, Blocks.air);
+                }
+            }
+        }
+    }
+
+    public void line(int x,int y,int x2, int y2, Chunk c, int a, int b) {
+        int w = x2 - x ;
+        int h = y2 - y ;
+        int dx1 = 0, dy1 = 0, dx2 = 0, dy2 = 0 ;
+        if (w<0) dx1 = -1 ; else if (w>0) dx1 = 1 ;
+        if (h<0) dy1 = -1 ; else if (h>0) dy1 = 1 ;
+        if (w<0) dx2 = -1 ; else if (w>0) dx2 = 1 ;
+        int longest = Math.abs(w) ;
+        int shortest = Math.abs(h) ;
+        if (!(longest>shortest)) {
+            longest = Math.abs(h) ;
+            shortest = Math.abs(w) ;
+            if (h<0) dy2 = -1 ; else if (h>0) dy2 = 1 ;
+            dx2 = 0 ;
+        }
+        int numerator = longest >> 1 ;
+        for (int i=0;i<=longest;i++) {
+            sqaureAround(c, a, b, x, y);
+            numerator += shortest ;
+            if (!(numerator<longest)) {
+                numerator -= longest ;
+                x += dx1 ;
+                y += dy1 ;
+            } else {
+                x += dx2 ;
+                y += dy2 ;
+            }
+        }
+    }
+
+    private void genCircle(int ox, int oy, int radius, Chunk c, int a, int b, int oz){
+        for (int y=-radius; y<=radius; y++){
+            for(int x=-radius; x<=radius; x++) {
+                if (x * x + y * y <= radius * radius){
+                    if (insideChunk(a, b, x, y)){
+                        setBlockInChunk(c, toC(x +ox), oz, toC(y +oy), BlockLoader.runeBlock);
+                    }
+                }
+            }
+        }
+    }
+    private void genMound(Chunk c, int a, int b, int x, int z, int basesize, int maxheight){
+        int maxup = Math.min(maxheight / 4, 4);
+        int up = 0;
+        int size = basesize;
+        int height = 8;
+        while (maxup > 0){
+            up += 1;
+            height += 1;
+            if (up == maxup){
+                up = 0;
+                maxup -= 1;
+                size -= 1;
+                if (size < 2){
+                    size = 2;
+                }
+            }
+            genCircle(x, z, size, c, a, b, height);
+
+        }
+    }
     private void genFeaturesToChunk(Chunk chunk, int p_73154_1_, int p_73154_2_){
 
 
 
-            for (int i = -64; i > -62; i++){
-                for (int j = -64; j > -62; i++) {
-                    if (insideChunk(p_73154_1_, p_73154_2_, i, j)){
-                        this.setBlockInChunk(chunk, i, 8, j, BlockLoader.runeTeleporter);
+                    for (int i = -64; i < -62; i++){
+                        for (int j = -64; j < -62; j++) {
+                            if (insideChunk(p_73154_1_, p_73154_2_, i, j)){
+                                this.setBlockInChunk(chunk, toC(i), 8, toC(j), BlockLoader.runeTeleporter);
+                            }
+                        }
+                    }
+
+        for (int roomID = 0; roomID < 4; roomID ++){
+            int[] room = this.roomPos[roomID];
+            for (int xCoord = this.roomPos[roomID][0]; xCoord <= this.roomPos[roomID][2]; xCoord ++){
+                for (int yCoord = this.roomPos[roomID][1]; yCoord <= this.roomPos[roomID][3]; yCoord ++){
+                    if (xCoord == room[0] || xCoord == room[2] || yCoord == room[1] || yCoord == room[3]){
+                        if (insideChunk(p_73154_1_, p_73154_2_, xCoord, yCoord)){
+                            this.makeWall(toC(xCoord), toC(yCoord), chunk);
+                        }
                     }
                 }
             }
-
+        }
          // inner room
 
-            for (int wall1x = -17; wall1x < 19; wall1x++) {
-                for (int wall1y = -19; wall1y < 20; wall1y++) {
+            for (int wall1x = -9; wall1x < 27; wall1x++) {
+                for (int wall1y = -19+8; wall1y < 20+8; wall1y++) {
                     if (insideChunk(p_73154_1_, p_73154_2_, wall1x, wall1y)) {
                         this.makeWall(toC(wall1x), toC(wall1y), chunk);
                     }
                 }
             }
-            for (int wall1x = -16; wall1x < 18; wall1x++) {
-                for (int wall1y = -18; wall1y < 19; wall1y++) {
+            for (int wall1x = -16+8; wall1x < 18+8; wall1x++) {
+                for (int wall1y = -18+8; wall1y < 19+8; wall1y++) {
                     if (insideChunk(p_73154_1_, p_73154_2_, wall1x, wall1y)) {
                         this.makeWall(toC(wall1x), toC(wall1y), chunk, Blocks.air);
                     }
@@ -212,10 +357,16 @@ public class ChunkProviderRuneEssenceMine implements IChunkProvider{
 
 
          // outer rooms
+        drawCorridor(true, -9, 1, -11, -64, chunk, p_73154_1_, p_73154_2_);
+        drawCorridor(false, 1, 45, -65, -58, chunk, p_73154_1_, p_73154_2_);
+        drawCorridor(false, 26, 80, -11, 1, chunk, p_73154_1_, p_73154_2_);
+        drawCorridor(true, 80, 71, 1, 45, chunk, p_73154_1_, p_73154_2_);
+        drawCorridor(true, 26, 14, 27, 80, chunk, p_73154_1_, p_73154_2_);
+        drawCorridor(false, 14, -29, 80, 71, chunk, p_73154_1_, p_73154_2_);
+        drawCorridor(false, -9, -64, 27, 19, chunk, p_73154_1_, p_73154_2_);
+        drawCorridor(true, -65, -58, 19, -29, chunk, p_73154_1_, p_73154_2_);
 
-
-
-
+        genMound(chunk, p_73154_1_, p_73154_2_, 0, 0, 5, 4 + 8);
     }
 
 
