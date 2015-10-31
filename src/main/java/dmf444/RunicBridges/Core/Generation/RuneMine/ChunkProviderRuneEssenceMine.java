@@ -366,7 +366,7 @@ public class ChunkProviderRuneEssenceMine implements IChunkProvider{
         drawCorridor(false, -9, -64, 27, 19, chunk, p_73154_1_, p_73154_2_);
         drawCorridor(true, -65, -58, 19, -29, chunk, p_73154_1_, p_73154_2_);
 
-        genMound(chunk, p_73154_1_, p_73154_2_, 0, 0, 5, 4 + 8);
+        genMound(chunk, p_73154_1_, p_73154_2_, 0, 0, 5, 25 + 8);
     }
 
 

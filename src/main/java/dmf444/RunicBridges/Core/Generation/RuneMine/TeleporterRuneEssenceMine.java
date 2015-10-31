@@ -47,7 +47,7 @@ public class TeleporterRuneEssenceMine extends Teleporter {
     @Override
     public void placeInPortal(Entity par1, double par2, double par4, double par6, float par7) {
         if (this.worldServerInstance.provider.dimensionId == -4412) {
-            par1.setLocationAndAngles(0.0d, 18.0d, 0.0d, par1.rotationYaw, 0.0F);
+            par1.setLocationAndAngles(0.0d, 30.0d, 0.0d, par1.rotationYaw, 0.0F);
             par1.motionX = par1.motionY = par1.motionZ = 0.0D;
         }
         else{
