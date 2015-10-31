@@ -37,7 +37,7 @@ public class RunicBridges
         DimBiomReg.registerDimension();
 
         PacketManager.init();
-        GameRegistry.registerWorldGenerator(new RunicGenerationManager(), 0);
+        GameRegistry.registerWorldGenerator(new RunicGenerationManager(), 2);
 
     }
 
