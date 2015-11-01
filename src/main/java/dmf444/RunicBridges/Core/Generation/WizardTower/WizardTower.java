@@ -42,7 +42,7 @@ public class WizardTower extends StructureVillagePieces.Village  {
             if (this.grdlvl < 0)
                 return true;
 
-            this.boundingBox.offset(0, this.grdlvl - this.boundingBox.maxY, 0);//4
+            this.boundingBox.offset(0, this.grdlvl - this.boundingBox.minY, 0);//4
         }
         int x = this.boundingBox.minX;
         int y = this.grdlvl;
