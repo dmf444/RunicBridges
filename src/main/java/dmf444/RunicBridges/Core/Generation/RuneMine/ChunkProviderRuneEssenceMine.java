@@ -287,7 +287,7 @@ public class ChunkProviderRuneEssenceMine implements IChunkProvider{
         for (int y=-radius; y<=radius; y++){
             for(int x=-radius; x<=radius; x++) {
                 if (x * x + y * y <= radius * radius){
-                    if (insideChunk(a, b, x, y)){
+                    if (insideChunk(a, b, x + ox, y + oy)){
                         setBlockInChunk(c, toC(x +ox), oz, toC(y +oy), BlockLoader.runeBlock);
                     }
                 }
@@ -295,11 +295,11 @@ public class ChunkProviderRuneEssenceMine implements IChunkProvider{
         }
     }
     private void genMound(Chunk c, int a, int b, int x, int z, int basesize, int maxheight){
-        int maxup = Math.min(maxheight / 4, 4);
+        int maxup = Math.min(maxheight / 4, 5);
         int up = 0;
         int size = basesize;
         int height = 8;
-        while (maxup > 0){
+        while (height < maxheight){
             up += 1;
             height += 1;
             if (up == maxup){
@@ -308,6 +308,9 @@ public class ChunkProviderRuneEssenceMine implements IChunkProvider{
                 size -= 1;
                 if (size < 2){
                     size = 2;
+                }
+                if (maxup < 2){
+                    maxup = 2;
                 }
             }
             genCircle(x, z, size, c, a, b, height);
@@ -366,7 +369,7 @@ public class ChunkProviderRuneEssenceMine implements IChunkProvider{
         drawCorridor(false, -9, -64, 27, 19, chunk, p_73154_1_, p_73154_2_);
         drawCorridor(true, -65, -58, 19, -29, chunk, p_73154_1_, p_73154_2_);
 
-        genMound(chunk, p_73154_1_, p_73154_2_, 0, 0, 5, 25 + 8);
+        genMound(chunk, p_73154_1_, p_73154_2_, -47, -47, 8, 18 + 8);
     }
 
 
