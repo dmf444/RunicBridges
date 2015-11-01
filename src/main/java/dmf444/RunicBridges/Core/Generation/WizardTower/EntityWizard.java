@@ -4,6 +4,7 @@ import cpw.mods.fml.common.registry.VillagerRegistry;
 import dmf444.RunicBridges.Core.Generation.RuneMine.TeleporterRuneEssenceMine;
 import dmf444.RunicBridges.Core.init.ItemLoader;
 import dmf444.RunicBridges.Core.items.LeaveDimensionToken;
+import dmf444.RunicBridges.Core.utils.Pos;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -29,6 +30,12 @@ public class EntityWizard extends EntityVillager{
         super(world, 4412);
         allowTeleport = false;
 
+    }
+
+    public EntityWizard(World world, Pos pos){
+        super(world, 4412);
+        allowTeleport = false;
+        spawnAt(pos.getX(), pos.getY(), pos.getZ());
     }
 
     @Override
@@ -93,6 +100,11 @@ public class EntityWizard extends EntityVillager{
         }
 
         public final static TradeHandler INSTANCE = new TradeHandler();
+
+    }
+
+    public void spawnAt(int x, int y, int z){
+        setPosition(x, y, z);
 
     }
 }

@@ -1,5 +1,6 @@
 package dmf444.RunicBridges.Core.Generation.WizardTower;
 
+import dmf444.RunicBridges.Core.utils.Pos;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
@@ -54,6 +55,7 @@ public class WizardTower extends StructureVillagePieces.Village  {
 
         //fillWithBlocks(world, sbb, 0, 0, 0, 28, 40, 20, Blocks.coal_block, Blocks.coal_block, false);
     genSchematicTower(world, x, y, z);
+        world.spawnEntityInWorld(new EntityWizard(world, new Pos(sbb.minX+11, sbb.minY+58, sbb.minZ+12)));
         return true;
     }
 
