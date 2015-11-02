@@ -321,7 +321,7 @@ public class ChunkProviderRuneEssenceMine implements IChunkProvider{
 
 
 
-                    for (int i = -64; i < -62; i++){
+                  /*  for (int i = -64; i < -62; i++){
                         for (int j = -64; j < -62; j++) {
                             if (insideChunk(p_73154_1_, p_73154_2_, i, j)){
                                 this.setBlockInChunk(chunk, toC(i), 8, toC(j), BlockLoader.runeTeleporter);
@@ -348,7 +348,21 @@ public class ChunkProviderRuneEssenceMine implements IChunkProvider{
                     this.setBlockInChunk(chunk, toC(i), 8, toC(j), BlockLoader.runeTeleporter);
                 }
             }
+        } // 80, -64*/
+        if (insideChunk(p_73154_1_, p_73154_2_, -64, -64)){
+            this.setBlockInChunk(chunk, toC(-64), 8, toC(-64), BlockLoader.runeTeleporter);
         }
+        if (insideChunk(p_73154_1_, p_73154_2_, -64, 79)){
+            this.setBlockInChunk(chunk, toC(-64), 8, toC(79), BlockLoader.runeTeleporter);
+        }
+        if (insideChunk(p_73154_1_, p_73154_2_, 79, 79)){
+            this.setBlockInChunk(chunk, toC(79), 8, toC(79), BlockLoader.runeTeleporter);
+        }
+        if (insideChunk(p_73154_1_, p_73154_2_, 79, -64)){
+            this.setBlockInChunk(chunk, toC(79), 8, toC(-64), BlockLoader.runeTeleporter);
+        }
+
+
 
         for (int roomID = 0; roomID < 4; roomID ++){
             int[] room = this.roomPos[roomID];

@@ -10,10 +10,12 @@ import dmf444.RunicBridges.Core.Generation.RuneMine.DimBiomReg;
 import dmf444.RunicBridges.Core.Generation.RunicGenerationManager;
 import dmf444.RunicBridges.Core.Generation.WizardTower.WizardInit;
 import dmf444.RunicBridges.Core.Lib.ModInfo;
+import dmf444.RunicBridges.Core.events.BlockBrokenRuneEssence;
 import dmf444.RunicBridges.Core.init.BlockLoader;
 import dmf444.RunicBridges.Core.init.ItemLoader;
 import dmf444.RunicBridges.Core.network.PacketManager;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraftforge.common.MinecraftForge;
 
 @Mod(modid = ModInfo.MODID, name=ModInfo.Mname, version = ModInfo.VERSION)
 public class RunicBridges
@@ -38,6 +40,7 @@ public class RunicBridges
 
         PacketManager.init();
         GameRegistry.registerWorldGenerator(new RunicGenerationManager(), 2);
+        MinecraftForge.EVENT_BUS.register(new BlockBrokenRuneEssence());
 
     }
 

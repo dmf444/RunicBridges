@@ -3,17 +3,14 @@ package dmf444.RunicBridges.Core.blocks;
 import dmf444.RunicBridges.Core.Generation.RuneMine.TeleporterRuneEssenceMine;
 import dmf444.RunicBridges.Core.Lib.BlockLib;
 import dmf444.RunicBridges.Core.Lib.ModInfo;
-import dmf444.RunicBridges.Core.init.BlockLoader;
 import dmf444.RunicBridges.Core.init.ItemLoader;
 import dmf444.RunicBridges.Core.items.LeaveDimensionToken;
 import dmf444.RunicBridges.RunicBridges;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 
@@ -59,16 +56,11 @@ public class RuneEssenceBlock extends Block {
         }
     }
 
+
+
     public void breakBlock(World world, int x, int y, int z, Block block, int meta){
         super.breakBlock(world, x, y, z, block, meta);
-        if(false) {
-            if (block.equals(BlockLoader.runeBlock)) {
-                if (!world.isRemote)
-                    world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(this.getItemDropped())));
-                world.spawnParticle("blockdust_"+BlockLib.bRuneEssence+"_0", x,y,z,x,y,z);
-                world.setBlock(x, y, z, BlockLoader.runeBlock);
-            }
-        }
+
     }
 
     public Item getItemDropped()
