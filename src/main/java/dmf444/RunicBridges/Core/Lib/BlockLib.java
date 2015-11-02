@@ -7,4 +7,5 @@ public class BlockLib {
     public static final String bRunicAltar = "runicaltar";
     public static final String bRuneEssence = "runeEssenceBlock";
     public static final String bTeleport = "teleportationBlock";
+    public static final String bLamp = "steampunkLamp";
 }

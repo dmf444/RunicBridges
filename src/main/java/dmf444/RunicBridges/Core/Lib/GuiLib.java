@@ -14,4 +14,5 @@ public class GuiLib {
     public static final ResourceLocation TextureRAc = new ResourceLocation("runicbridges:textures/blocks/RuneAltarColor.png");
     public static final ResourceLocation TextureRT = new ResourceLocation("runicbridges:textures/blocks/teleporter.png");
     public static final ResourceLocation TextureWizard = new ResourceLocation(i, "textures/entity/wizard.png");
+    public static final ResourceLocation TextureLamp = new ResourceLocation(i, "textures/blocks/lamp.png");
 }

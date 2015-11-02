@@ -100,7 +100,7 @@ public class ModelWizard extends ModelBase {
         this.villagerHead.addChild(this.Piece3);
         this.villagerHead.addChild(this.Base);
         this.villagerHead.addChild(this.Piece4);
-        this.villagerHead.addChild(this.villagerArms2);
+        //this.villagerHead.addChild(this.villagerArms2);
         this.villagerHead.addChild(this.Piece5);
         this.villagerHead.addChild(this.Piece2);
         this.villagerHead.addChild(this.monacleStem);
@@ -117,6 +117,7 @@ public class ModelWizard extends ModelBase {
         this.rightVillagerLeg.render(f5);
         this.villagerArms1.render(f5);
         this.villagerBody0.render(f5);
+        this.villagerArms2.render(f5);
         this.villagerArms0.render(f5);
     }
 
@@ -133,9 +134,9 @@ public class ModelWizard extends ModelBase {
     {
         this.villagerHead.rotateAngleY = p_78087_4_ / (180F / (float)Math.PI);
         this.villagerHead.rotateAngleX = p_78087_5_ / (180F / (float)Math.PI);
-        //this.villagerArms.rotationPointY = 3.0F;
-       // this.villagerArms.rotationPointZ = -1.0F;
-        //this.villagerArms.rotateAngleX = -0.75F;
+        this.villagerArms2.rotationPointY = 3.0F;
+        this.villagerArms2.rotationPointZ = -1.0F;
+        this.villagerArms2.rotateAngleX = -0.75F;
         this.rightVillagerLeg.rotateAngleX = MathHelper.cos(p_78087_1_ * 0.6662F) * 1.4F * p_78087_2_ * 0.5F;
         this.leftVillagerLeg.rotateAngleX = MathHelper.cos(p_78087_1_ * 0.6662F + (float)Math.PI) * 1.4F * p_78087_2_ * 0.5F;
         this.rightVillagerLeg.rotateAngleY = 0.0F;
