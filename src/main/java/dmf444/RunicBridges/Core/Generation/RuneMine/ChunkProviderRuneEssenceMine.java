@@ -295,7 +295,7 @@ public class ChunkProviderRuneEssenceMine implements IChunkProvider{
         }
     }
     private void genMound(Chunk c, int a, int b, int x, int z, int basesize, int maxheight){
-        int maxup = Math.min(maxheight / 4, 5);
+        int maxup = Math.min(maxheight / 4, 9);
         int up = 0;
         int size = basesize;
         int height = 8;
@@ -328,6 +328,27 @@ public class ChunkProviderRuneEssenceMine implements IChunkProvider{
                             }
                         }
                     }
+        for (int i = -64; i < -62; i++){
+            for (int j = 78; j < 80; j++) {
+                if (insideChunk(p_73154_1_, p_73154_2_, i, j)){
+                    this.setBlockInChunk(chunk, toC(i), 8, toC(j), BlockLoader.runeTeleporter);
+                }
+            }
+        }
+        for (int i = 78; i < 80; i++){
+            for (int j = -64; j < -62; j++) {
+                if (insideChunk(p_73154_1_, p_73154_2_, i, j)){
+                    this.setBlockInChunk(chunk, toC(i), 8, toC(j), BlockLoader.runeTeleporter);
+                }
+            }
+        }
+        for (int i = 78; i < 80; i++){
+            for (int j = 78; j < 80; j++) {
+                if (insideChunk(p_73154_1_, p_73154_2_, i, j)){
+                    this.setBlockInChunk(chunk, toC(i), 8, toC(j), BlockLoader.runeTeleporter);
+                }
+            }
+        }
 
         for (int roomID = 0; roomID < 4; roomID ++){
             int[] room = this.roomPos[roomID];
@@ -369,7 +390,10 @@ public class ChunkProviderRuneEssenceMine implements IChunkProvider{
         drawCorridor(false, -9, -64, 27, 19, chunk, p_73154_1_, p_73154_2_);
         drawCorridor(true, -65, -58, 19, -29, chunk, p_73154_1_, p_73154_2_);
 
-        genMound(chunk, p_73154_1_, p_73154_2_, -47, -47, 8, 18 + 8);
+        genMound(chunk, p_73154_1_, p_73154_2_, -47, -47, 7, 31);
+        genMound(chunk, p_73154_1_, p_73154_2_, 63, 63, 7, 31);
+        genMound(chunk, p_73154_1_, p_73154_2_, 63, -47, 7, 31);
+        genMound(chunk, p_73154_1_, p_73154_2_, -47, 63, 7, 31);
     }
 
 
