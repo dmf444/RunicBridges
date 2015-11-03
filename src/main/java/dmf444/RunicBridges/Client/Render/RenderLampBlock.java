@@ -61,9 +61,14 @@ public class RenderLampBlock extends TileEntitySpecialRenderer{
             GL11.glRotatef((float) short1, 1.0F, 0.0F, 0.0F);
             GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
             GL11.glTranslated(0D, -1.5D, 0D);
+            GL11.glEnable(GL11.GL_BLEND);
+            GL11.glEnable(GL11.GL_CULL_FACE);
+            //GL11.pu;
             ResourceLocation textures = (GuiLib.TextureLamp);
             Minecraft.getMinecraft().renderEngine.bindTexture(textures);
             this.lamp.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+            GL11.glDisable(GL11.GL_BLEND);
+            GL11.glDisable(GL11.GL_CULL_FACE);
             GL11.glPopMatrix();
         }
     }
