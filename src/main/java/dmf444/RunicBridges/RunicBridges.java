@@ -14,6 +14,7 @@ import dmf444.RunicBridges.Core.events.BlockBrokenRuneEssence;
 import dmf444.RunicBridges.Core.init.BlockLoader;
 import dmf444.RunicBridges.Core.init.ItemLoader;
 import dmf444.RunicBridges.Core.network.PacketManager;
+import dmf444.RunicBridges.Core.utils.RunicTab;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -28,7 +29,7 @@ public class RunicBridges
 
 
 
-    public static final CreativeTabs tab = CreativeTabs.tabMisc;
+    public static final CreativeTabs tab = RunicTab.INSTANCE;
 
     @Mod.EventHandler
     public void preinit(FMLPreInitializationEvent event)

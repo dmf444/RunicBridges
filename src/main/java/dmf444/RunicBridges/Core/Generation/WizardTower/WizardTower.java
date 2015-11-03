@@ -1,5 +1,6 @@
 package dmf444.RunicBridges.Core.Generation.WizardTower;
 
+import dmf444.RunicBridges.Core.init.BlockLoader;
 import dmf444.RunicBridges.Core.utils.Pos;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -2268,11 +2269,11 @@ public class WizardTower extends StructureVillagePieces.Village  {
         world.setBlock(lowX + 9, lowY + 57, lowZ + 21, Block.getBlockById(53), 0, 2);
         world.setBlock(lowX + 9, lowY + 58, lowZ + 8, Block.getBlockById(5), 0, 2);
         world.setBlockMetadataWithNotify(lowX + 9, lowY + 58, lowZ + 8, 5, 2);
-        world.setBlock(lowX + 9, lowY + 58, lowZ + 9, Block.getBlockById(50), 0, 2);
+        world.setBlock(lowX + 9, lowY + 58, lowZ + 9, BlockLoader.lamp, 0, 2);
         world.setBlockMetadataWithNotify(lowX + 9, lowY + 58, lowZ + 9, 5, 2);
         world.setBlock(lowX + 9, lowY + 58, lowZ + 12, Block.getBlockById(47), 0, 2);
         world.setBlock(lowX + 9, lowY + 58, lowZ + 15, Block.getBlockById(47), 0, 2);
-        world.setBlock(lowX + 9, lowY + 58, lowZ + 18, Block.getBlockById(50), 0, 2);
+        world.setBlock(lowX + 9, lowY + 58, lowZ + 18, BlockLoader.lamp, 0, 2);
         world.setBlockMetadataWithNotify(lowX + 9, lowY + 58, lowZ + 18, 5, 2);
         world.setBlock(lowX + 9, lowY + 58, lowZ + 19, Block.getBlockById(5), 0, 2);
         world.setBlockMetadataWithNotify(lowX + 9, lowY + 58, lowZ + 19, 5, 2);
@@ -2760,9 +2761,9 @@ public class WizardTower extends StructureVillagePieces.Village  {
         world.setBlockMetadataWithNotify(lowX + 10, lowY + 60, lowZ + 18, 5, 2);
         world.setBlock(lowX + 10, lowY + 61, lowZ + 9, Block.getBlockById(5), 0, 2);
         world.setBlockMetadataWithNotify(lowX + 10, lowY + 61, lowZ + 9, 5, 2);
-        world.setBlock(lowX + 10, lowY + 61, lowZ + 10, Block.getBlockById(50), 0, 2);
+        world.setBlock(lowX + 10, lowY + 61, lowZ + 10, BlockLoader.lamp, 0, 2);
         world.setBlockMetadataWithNotify(lowX + 10, lowY + 61, lowZ + 10, 5, 2);
-        world.setBlock(lowX + 10, lowY + 61, lowZ + 17, Block.getBlockById(50), 0, 2);
+        world.setBlock(lowX + 10, lowY + 61, lowZ + 17, BlockLoader.lamp, 0, 2);
         world.setBlockMetadataWithNotify(lowX + 10, lowY + 61, lowZ + 17, 5, 2);
         world.setBlock(lowX + 10, lowY + 61, lowZ + 18, Block.getBlockById(5), 0, 2);
         world.setBlockMetadataWithNotify(lowX + 10, lowY + 61, lowZ + 18, 5, 2);
@@ -2780,9 +2781,9 @@ public class WizardTower extends StructureVillagePieces.Village  {
         world.setBlockMetadataWithNotify(lowX + 10, lowY + 63, lowZ + 16, 5, 2);
         world.setBlock(lowX + 10, lowY + 64, lowZ + 11, Block.getBlockById(5), 0, 2);
         world.setBlockMetadataWithNotify(lowX + 10, lowY + 64, lowZ + 11, 5, 2);
-        world.setBlock(lowX + 10, lowY + 64, lowZ + 12, Block.getBlockById(50), 0, 2);
+        world.setBlock(lowX + 10, lowY + 64, lowZ + 12, BlockLoader.lamp, 0, 2);
         world.setBlockMetadataWithNotify(lowX + 10, lowY + 64, lowZ + 12, 5, 2);
-        world.setBlock(lowX + 10, lowY + 64, lowZ + 15, Block.getBlockById(50), 0, 2);
+        world.setBlock(lowX + 10, lowY + 64, lowZ + 15, BlockLoader.lamp, 0, 2);
         world.setBlockMetadataWithNotify(lowX + 10, lowY + 64, lowZ + 15, 5, 2);
         world.setBlock(lowX + 10, lowY + 64, lowZ + 16, Block.getBlockById(5), 0, 2);
         world.setBlockMetadataWithNotify(lowX + 10, lowY + 64, lowZ + 16, 5, 2);
@@ -3781,9 +3782,9 @@ public class WizardTower extends StructureVillagePieces.Village  {
     public void genSchematicTower7(World world, int lowX, int lowY, int lowZ) {
         world.setBlock(lowX + 12, lowY + 64, lowZ + 9, Block.getBlockById(162), 0, 2);
         world.setBlockMetadataWithNotify(lowX + 12, lowY + 64, lowZ + 9, 1, 2);
-        world.setBlock(lowX + 12, lowY + 64, lowZ + 10, Block.getBlockById(50), 0, 2);
+        world.setBlock(lowX + 12, lowY + 64, lowZ + 10, BlockLoader.lamp, 0, 2);
         world.setBlockMetadataWithNotify(lowX + 12, lowY + 64, lowZ + 10, 5, 2);
-        world.setBlock(lowX + 12, lowY + 64, lowZ + 17, Block.getBlockById(50), 0, 2);
+        world.setBlock(lowX + 12, lowY + 64, lowZ + 17, BlockLoader.lamp, 0, 2);
         world.setBlockMetadataWithNotify(lowX + 12, lowY + 64, lowZ + 17, 5, 2);
         world.setBlock(lowX + 12, lowY + 64, lowZ + 18, Block.getBlockById(162), 0, 2);
         world.setBlockMetadataWithNotify(lowX + 12, lowY + 64, lowZ + 18, 1, 2);
@@ -5343,9 +5344,9 @@ public class WizardTower extends StructureVillagePieces.Village  {
         world.setBlockMetadataWithNotify(lowX + 15, lowY + 63, lowZ + 18, 1, 2);
         world.setBlock(lowX + 15, lowY + 64, lowZ + 9, Block.getBlockById(162), 0, 2);
         world.setBlockMetadataWithNotify(lowX + 15, lowY + 64, lowZ + 9, 1, 2);
-        world.setBlock(lowX + 15, lowY + 64, lowZ + 10, Block.getBlockById(50), 0, 2);
+        world.setBlock(lowX + 15, lowY + 64, lowZ + 10, BlockLoader.lamp, 0, 2);
         world.setBlockMetadataWithNotify(lowX + 15, lowY + 64, lowZ + 10, 5, 2);
-        world.setBlock(lowX + 15, lowY + 64, lowZ + 17, Block.getBlockById(50), 0, 2);
+        world.setBlock(lowX + 15, lowY + 64, lowZ + 17, BlockLoader.lamp, 0, 2);
         world.setBlockMetadataWithNotify(lowX + 15, lowY + 64, lowZ + 17, 5, 2);
 
     }
@@ -6384,9 +6385,9 @@ public class WizardTower extends StructureVillagePieces.Village  {
         world.setBlockMetadataWithNotify(lowX + 17, lowY + 60, lowZ + 18, 5, 2);
         world.setBlock(lowX + 17, lowY + 61, lowZ + 9, Block.getBlockById(5), 0, 2);
         world.setBlockMetadataWithNotify(lowX + 17, lowY + 61, lowZ + 9, 5, 2);
-        world.setBlock(lowX + 17, lowY + 61, lowZ + 10, Block.getBlockById(50), 0, 2);
+        world.setBlock(lowX + 17, lowY + 61, lowZ + 10, BlockLoader.lamp, 0, 2);
         world.setBlockMetadataWithNotify(lowX + 17, lowY + 61, lowZ + 10, 5, 2);
-        world.setBlock(lowX + 17, lowY + 61, lowZ + 17, Block.getBlockById(50), 0, 2);
+        world.setBlock(lowX + 17, lowY + 61, lowZ + 17, BlockLoader.lamp, 0, 2);
         world.setBlockMetadataWithNotify(lowX + 17, lowY + 61, lowZ + 17, 5, 2);
         world.setBlock(lowX + 17, lowY + 61, lowZ + 18, Block.getBlockById(5), 0, 2);
         world.setBlockMetadataWithNotify(lowX + 17, lowY + 61, lowZ + 18, 5, 2);
@@ -6411,9 +6412,9 @@ public class WizardTower extends StructureVillagePieces.Village  {
         world.setBlockMetadataWithNotify(lowX + 17, lowY + 63, lowZ + 16, 5, 2);
         world.setBlock(lowX + 17, lowY + 64, lowZ + 11, Block.getBlockById(5), 0, 2);
         world.setBlockMetadataWithNotify(lowX + 17, lowY + 64, lowZ + 11, 5, 2);
-        world.setBlock(lowX + 17, lowY + 64, lowZ + 12, Block.getBlockById(50), 0, 2);
+        world.setBlock(lowX + 17, lowY + 64, lowZ + 12, BlockLoader.lamp, 0, 2);
         world.setBlockMetadataWithNotify(lowX + 17, lowY + 64, lowZ + 12, 5, 2);
-        world.setBlock(lowX + 17, lowY + 64, lowZ + 15, Block.getBlockById(50), 0, 2);
+        world.setBlock(lowX + 17, lowY + 64, lowZ + 15, BlockLoader.lamp, 0, 2);
         world.setBlockMetadataWithNotify(lowX + 17, lowY + 64, lowZ + 15, 5, 2);
         world.setBlock(lowX + 17, lowY + 64, lowZ + 16, Block.getBlockById(5), 0, 2);
         world.setBlockMetadataWithNotify(lowX + 17, lowY + 64, lowZ + 16, 5, 2);
@@ -6777,11 +6778,11 @@ public class WizardTower extends StructureVillagePieces.Village  {
         world.setBlockMetadataWithNotify(lowX + 18, lowY + 57, lowZ + 21, 1, 2);
         world.setBlock(lowX + 18, lowY + 58, lowZ + 8, Block.getBlockById(5), 0, 2);
         world.setBlockMetadataWithNotify(lowX + 18, lowY + 58, lowZ + 8, 5, 2);
-        world.setBlock(lowX + 18, lowY + 58, lowZ + 9, Block.getBlockById(50), 0, 2);
+        world.setBlock(lowX + 18, lowY + 58, lowZ + 9, BlockLoader.lamp, 0, 2);
         world.setBlockMetadataWithNotify(lowX + 18, lowY + 58, lowZ + 9, 5, 2);
         world.setBlock(lowX + 18, lowY + 58, lowZ + 12, Block.getBlockById(47), 0, 2);
         world.setBlock(lowX + 18, lowY + 58, lowZ + 15, Block.getBlockById(47), 0, 2);
-        world.setBlock(lowX + 18, lowY + 58, lowZ + 18, Block.getBlockById(50), 0, 2);
+        world.setBlock(lowX + 18, lowY + 58, lowZ + 18, BlockLoader.lamp, 0, 2);
         world.setBlockMetadataWithNotify(lowX + 18, lowY + 58, lowZ + 18, 5, 2);
         world.setBlock(lowX + 18, lowY + 58, lowZ + 19, Block.getBlockById(5), 0, 2);
         world.setBlockMetadataWithNotify(lowX + 18, lowY + 58, lowZ + 19, 5, 2);

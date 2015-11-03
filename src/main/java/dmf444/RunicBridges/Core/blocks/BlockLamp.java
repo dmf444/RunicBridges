@@ -3,8 +3,8 @@ package dmf444.RunicBridges.Core.blocks;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import dmf444.RunicBridges.Client.ClientProxy;
-import dmf444.RunicBridges.Client.Render.RenderLamp;
 import dmf444.RunicBridges.Core.blocks.tileentity.TileLamp;
+import dmf444.RunicBridges.RunicBridges;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -25,6 +25,7 @@ public class BlockLamp extends BlockContainer {
     public BlockLamp() {
         super(Material.glass);
         this.setLightLevel(1.0F);
+        this.setCreativeTab(RunicBridges.tab);
     }
 
 
