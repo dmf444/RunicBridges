@@ -136,7 +136,27 @@ public class ModelLamp extends ModelBase {
     }
 
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+    public void render(Entity p_78088_1_, float p_78088_2_, float p_78088_3_, float p_78088_4_, float p_78088_5_, float p_78088_6_, float p_78088_7_) {
+       // if (RunicBridges.proxy.renderPass == 0){
+            renderSolid(p_78088_1_, p_78088_2_, p_78088_3_, p_78088_4_, p_78088_5_, p_78088_6_, p_78088_7_);
+       // }
+       // else {
+            renderTransparent(p_78088_1_, p_78088_2_, p_78088_3_, p_78088_4_, p_78088_5_, p_78088_6_, p_78088_7_);
+       // }
+    }
+
+    public void renderTransparent(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+        GL11.glPushMatrix();
+        GL11.glTranslatef(this.LightBulb.offsetX, this.LightBulb.offsetY, this.LightBulb.offsetZ);
+        GL11.glTranslatef(this.LightBulb.rotationPointX * f5, this.LightBulb.rotationPointY * f5, this.LightBulb.rotationPointZ * f5);
+        GL11.glScaled(0.5D, 0.5D, 0.5D);
+        GL11.glTranslatef(-this.LightBulb.offsetX, -this.LightBulb.offsetY, -this.LightBulb.offsetZ);
+        GL11.glTranslatef(-this.LightBulb.rotationPointX * f5, -this.LightBulb.rotationPointY * f5, -this.LightBulb.rotationPointZ * f5);
+        this.LightBulb.render(f5);
+        GL11.glPopMatrix();
+    }
+
+    public void renderSolid(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         GL11.glPushMatrix();
         GL11.glTranslatef(this.Shape3.offsetX, this.Shape3.offsetY, this.Shape3.offsetZ);
         GL11.glTranslatef(this.Shape3.rotationPointX * f5, this.Shape3.rotationPointY * f5, this.Shape3.rotationPointZ * f5);
@@ -170,6 +190,7 @@ public class ModelLamp extends ModelBase {
         this.LightBulbGlass.render(f5);
         GL11.glPopMatrix();
         GL11.glPushMatrix();
+        GL11.glEnable(GL11.GL_BLEND);
         GL11.glTranslatef(this.OutConnector3_2.offsetX, this.OutConnector3_2.offsetY, this.OutConnector3_2.offsetZ);
         GL11.glTranslatef(this.OutConnector3_2.rotationPointX * f5, this.OutConnector3_2.rotationPointY * f5, this.OutConnector3_2.rotationPointZ * f5);
         GL11.glScaled(0.4D, 0.4D, 0.4D);
@@ -281,15 +302,9 @@ public class ModelLamp extends ModelBase {
         GL11.glTranslatef(-this.Shape4.rotationPointX * f5, -this.Shape4.rotationPointY * f5, -this.Shape4.rotationPointZ * f5);
         this.Shape4.render(f5);
         GL11.glPopMatrix();
+
         GL11.glPushMatrix();
-        GL11.glTranslatef(this.LightBulb.offsetX, this.LightBulb.offsetY, this.LightBulb.offsetZ);
-        GL11.glTranslatef(this.LightBulb.rotationPointX * f5, this.LightBulb.rotationPointY * f5, this.LightBulb.rotationPointZ * f5);
-        GL11.glScaled(0.5D, 0.5D, 0.5D);
-        GL11.glTranslatef(-this.LightBulb.offsetX, -this.LightBulb.offsetY, -this.LightBulb.offsetZ);
-        GL11.glTranslatef(-this.LightBulb.rotationPointX * f5, -this.LightBulb.rotationPointY * f5, -this.LightBulb.rotationPointZ * f5);
-        this.LightBulb.render(f5);
-        GL11.glPopMatrix();
-        GL11.glPushMatrix();
+        GL11.glEnable(GL11.GL_BLEND);
         GL11.glTranslatef(this.TowCable.offsetX, this.TowCable.offsetY, this.TowCable.offsetZ);
         GL11.glTranslatef(this.TowCable.rotationPointX * f5, this.TowCable.rotationPointY * f5, this.TowCable.rotationPointZ * f5);
         GL11.glScaled(0.1D, 0.1D, 0.1D);

@@ -14,6 +14,7 @@ import dmf444.RunicBridges.Core.blocks.tileentity.TileRunicAltar;
 
 public class ClientProxy extends CommonProxy {
 
+    public static int renderPass;
     public static int LampRenderer = RenderingRegistry.getNextAvailableRenderId();
 
     public void registerRenderers() {

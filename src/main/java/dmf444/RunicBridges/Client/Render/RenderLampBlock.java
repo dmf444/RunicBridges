@@ -1,8 +1,8 @@
 package dmf444.RunicBridges.Client.Render;
 
+import dmf444.RunicBridges.Client.ClientProxy;
 import dmf444.RunicBridges.Core.Lib.GuiLib;
 import dmf444.RunicBridges.Core.blocks.tileentity.TileLamp;
-import dmf444.RunicBridges.Core.blocks.tileentity.TileRuneTeleportation;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
@@ -66,7 +66,8 @@ public class RenderLampBlock extends TileEntitySpecialRenderer{
             //GL11.pu;
             ResourceLocation textures = (GuiLib.TextureLamp);
             Minecraft.getMinecraft().renderEngine.bindTexture(textures);
-            this.lamp.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+            if (ClientProxy.renderPass == 1) {this.lamp.renderSolid((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);}
+            else {this.lamp.renderTransparent((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);}
             GL11.glDisable(GL11.GL_BLEND);
             GL11.glDisable(GL11.GL_CULL_FACE);
             GL11.glPopMatrix();

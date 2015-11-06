@@ -1,8 +1,6 @@
 package dmf444.RunicBridges.Client.Render;
 
-import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import cpw.mods.fml.client.registry.RenderingRegistry;
 import dmf444.RunicBridges.Client.ClientProxy;
 import dmf444.RunicBridges.Core.Lib.GuiLib;
 import net.minecraft.block.Block;
@@ -24,7 +22,8 @@ public class RenderLamp implements ISimpleBlockRenderingHandler {
         GL11.glTranslated(0D, -1.15D, 0D);
         ModelLamp lamp = new ModelLamp();
         Minecraft.getMinecraft().renderEngine.bindTexture(GuiLib.TextureLamp);
-        lamp.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+         if (ClientProxy.renderPass == 1) {lamp.renderSolid((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);}
+        else {lamp.renderTransparent((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);}
         GL11.glPopMatrix();
     }
 

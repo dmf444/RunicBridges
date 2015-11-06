@@ -183,7 +183,7 @@ public class ChunkProviderRuneEssenceMine implements IChunkProvider{
 
 
         }
-        else {
+        else if (p_73154_1_ >= -5 && p_73154_1_ <= 5 && p_73154_2_ >= -5 && p_73154_2_ <= 5  ) {
             for (int k = 0; k < 32; ++k) {
                 Block block  = Blocks.stone;
 
@@ -206,6 +206,33 @@ public class ChunkProviderRuneEssenceMine implements IChunkProvider{
                 }
 
             }
+        }
+        else if (p_73154_1_ >= -6 && p_73154_1_ <= 6 && p_73154_2_ >= -6 && p_73154_2_ <= 6  ) {
+            for (int k = 0; k < 32; ++k) {
+                Block block  = Blocks.bedrock;
+
+                l = k >> 4;
+                ExtendedBlockStorage extendedblockstorage = chunk.getBlockStorageArray()[l];
+
+                if (extendedblockstorage == null)
+                {
+                    extendedblockstorage = new ExtendedBlockStorage(k, !this.worldObj.provider.hasNoSky);
+                    chunk.getBlockStorageArray()[l] = extendedblockstorage;
+                }
+
+                for (int i1 = 0; i1 < 16; ++i1)
+                {
+                    for (int j1 = 0; j1 < 16; ++j1)
+                    {
+                        extendedblockstorage.func_150818_a(i1, k & 15, j1, block);
+                        extendedblockstorage.setExtBlockMetadata(i1, k & 15, j1, 0);
+                    }
+                }
+
+            }
+        }
+        else {
+
         }
         chunk.generateSkylightMap();
         return chunk;

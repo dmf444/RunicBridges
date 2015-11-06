@@ -32,7 +32,7 @@ public class BlockLamp extends BlockContainer {
     @SideOnly(Side.CLIENT)
     public int getRenderType()
     {
-        return ClientProxy.LampRenderer;
+        return -1;
     }
     public boolean isOpaqueCube()
     {
@@ -41,6 +41,18 @@ public class BlockLamp extends BlockContainer {
     public boolean renderAsNormalBlock()
     {
         return false;
+    }
+
+    @Override
+    public boolean canRenderInPass(int pass) {
+        ClientProxy.renderPass = pass;
+
+        return true;
+    }
+
+    @Override
+    public int getRenderBlockPass() {
+        return 1;
     }
 
     @Override

@@ -6,6 +6,8 @@ package dmf444.RunicBridges.Core;
 public class CommonProxy {
 
 
+    public static int renderPass = 0;
+
     public void registerRenderers(){//NOOOP
     }
 
