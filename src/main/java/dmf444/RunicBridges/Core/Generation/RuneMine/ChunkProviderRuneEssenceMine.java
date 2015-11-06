@@ -148,7 +148,10 @@ public class ChunkProviderRuneEssenceMine implements IChunkProvider{
 
             for (int k = 0; k < 32; ++k) {
                 Block block;
-                if (k <= 8) {
+                if (k == 0){
+                    block = Blocks.bedrock;
+                }
+                if (k <= 8 && k != 0) {
                     block = Blocks.snow;
                 }
                 else if (k > 8 && k < 31){
@@ -185,7 +188,7 @@ public class ChunkProviderRuneEssenceMine implements IChunkProvider{
         }
         else if (p_73154_1_ >= -5 && p_73154_1_ <= 5 && p_73154_2_ >= -5 && p_73154_2_ <= 5  ) {
             for (int k = 0; k < 32; ++k) {
-                Block block  = Blocks.stone;
+                Block block  = k == 0 ? Blocks.bedrock : Blocks.stone;
 
                 l = k >> 4;
                 ExtendedBlockStorage extendedblockstorage = chunk.getBlockStorageArray()[l];

@@ -5,6 +5,7 @@ import dmf444.RunicBridges.Core.Lib.BlockLib;
 import dmf444.RunicBridges.Core.init.BlockLoader;
 import dmf444.RunicBridges.Core.init.ItemLoader;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.BlockEvent;
@@ -14,6 +15,18 @@ import net.minecraftforge.event.world.BlockEvent;
  * our legal team. (dmf444)
  */
 public class BlockBrokenRuneEssence {
+
+
+    @SubscribeEvent
+    public void onStoneBrokenInDimension(BlockEvent.BreakEvent event){
+        if (event.block == Blocks.stone){
+            if (event.world.provider.dimensionId == -4412){
+                if (!event.getPlayer().capabilities.isCreativeMode) {
+                    event.setCanceled(true);
+                }
+            }
+        }
+    }
 
 
     @SubscribeEvent
