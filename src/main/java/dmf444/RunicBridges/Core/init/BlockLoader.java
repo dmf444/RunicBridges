@@ -2,10 +2,7 @@ package dmf444.RunicBridges.Core.init;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import dmf444.RunicBridges.Core.Lib.BlockLib;
-import dmf444.RunicBridges.Core.blocks.BlockLamp;
-import dmf444.RunicBridges.Core.blocks.BlockRunicAltar;
-import dmf444.RunicBridges.Core.blocks.RuneEssenceBlock;
-import dmf444.RunicBridges.Core.blocks.RuneTeleportationBlock;
+import dmf444.RunicBridges.Core.blocks.*;
 import dmf444.RunicBridges.Core.blocks.tileentity.TileLamp;
 import dmf444.RunicBridges.Core.blocks.tileentity.TileRuneTeleportation;
 import dmf444.RunicBridges.Core.blocks.tileentity.TileRunicAltar;
@@ -20,6 +17,7 @@ public class BlockLoader {
         public static Block runeBlock;
         public static Block runeTeleporter;
         public static Block lamp;
+        public static Block invisibla;
 
 
         public static boolean Register=false;
@@ -29,6 +27,7 @@ public class BlockLoader {
             runeBlock = new RuneEssenceBlock().setBlockName(BlockLib.bRuneEssence);
             runeTeleporter = new RuneTeleportationBlock().setBlockName(BlockLib.bTeleport);
             lamp = new BlockLamp().setBlockName(BlockLib.bLamp);
+            invisibla = new BlockInvisble();
 
 
 
@@ -40,7 +39,7 @@ public class BlockLoader {
                 GameRegistry.registerBlock(runeBlock, BlockLib.bRuneEssence);
                 GameRegistry.registerBlock(runeTeleporter, BlockLib.bTeleport);
                 GameRegistry.registerBlock(lamp, BlockLib.bLamp);
-
+                GameRegistry.registerBlock(invisibla, "invisibla");
 
             }
             Register=true;
