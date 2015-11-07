@@ -151,7 +151,7 @@ public class ChunkProviderRuneEssenceMine implements IChunkProvider{
                 if (k == 0){
                     block = Blocks.bedrock;
                 }
-                if (k <= 8 && k != 0) {
+                else if (k <= 8 && k != 0) {
                     block = Blocks.snow;
                 }
                 else if (k > 8 && k < 31){
