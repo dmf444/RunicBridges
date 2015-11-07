@@ -158,7 +158,7 @@ public class ChunkProviderRuneEssenceMine implements IChunkProvider{
                     block = Blocks.air;
                 }
                 else {
-                    block = Blocks.air;
+                    block = BlockLoader.invisibla;
                 }
                 l = k >> 4;
                 ExtendedBlockStorage extendedblockstorage = chunk.getBlockStorageArray()[l];
