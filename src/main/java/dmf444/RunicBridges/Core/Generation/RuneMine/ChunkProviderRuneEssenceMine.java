@@ -251,8 +251,10 @@ public class ChunkProviderRuneEssenceMine implements IChunkProvider{
 
     }
 
-
     private void setBlockInChunk(Chunk chunk, int x, int y, int z, Block b){
+        setBlockInChunk(chunk, x, y, z, b, 0);
+    }
+    private void setBlockInChunk(Chunk chunk, int x, int y, int z, Block b, int meta){
         int l;
         l = y >> 4;
         ExtendedBlockStorage e = chunk.getBlockStorageArray()[l];
@@ -263,7 +265,7 @@ public class ChunkProviderRuneEssenceMine implements IChunkProvider{
             chunk.getBlockStorageArray()[l] = e;
         }
         e.func_150818_a(x, y & 15, z, b);
-        e.setExtBlockMetadata(x, y & 15, z, 0);
+        e.setExtBlockMetadata(x, y & 15, z, meta);
     }
 
     public void sqaureAround(Chunk c, int a, int b, int x, int y){
@@ -346,7 +348,37 @@ public class ChunkProviderRuneEssenceMine implements IChunkProvider{
             genCircle(x, z, size, c, a, b, height);
 
         }
+        for (int x1 = x - basesize - 2; x1 < x + basesize + 3; x1++){
+            for (int y1 = z - basesize - 2; y1 < z + basesize + 3; y1 ++){
+                if (!insideChunk(a, b, x1, y1)){
+                    continue;
+                }
+                if (x1 == x - basesize - 2 || x1 == x + basesize + 2 && y1 > z - basesize - 1 && y1 <= z + basesize + 2){
+
+                    setBlockInChunk(c, toC(x1), 9, toC(y1), Blocks.rail, 0x0);
+
+                }
+                else if (x1 == x - basesize - 2 && y1 == z - basesize - 2){
+                    setBlockInChunk(c, toC(x1), 9, toC(y1), Blocks.rail, 0x7);
+                }
+                else if (x1 == x + basesize + 2 && y1 == z - basesize - 2){
+                    setBlockInChunk(c, toC(x1), 9, toC(y1), Blocks.rail, 0x8);
+                }
+                else if (x1 == x + basesize + 2 && y1 == z + basesize + 2){
+                    setBlockInChunk(c, toC(x1), 9, toC(y1), Blocks.rail, 0x6);
+                }
+                else if (y1 == z - basesize - 2 || y1 == z + basesize + 2 && x1 > x - basesize - 1 && x1 <= x + basesize + 2){
+                    setBlockInChunk(c, toC(x1), 9, toC(y1), Blocks.rail, 0x1);
+                }
+                else if (x1 == x - basesize - 2 && y1 == z - basesize - 2){
+                    setBlockInChunk(c, toC(x1), 9, toC(y1), Blocks.rail, 0x9);
+                }
+            }
+        }
     }
+
+
+
     private void genFeaturesToChunk(Chunk chunk, int p_73154_1_, int p_73154_2_){
 
 

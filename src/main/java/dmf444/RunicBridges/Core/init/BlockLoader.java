@@ -39,7 +39,7 @@ public class BlockLoader {
                 GameRegistry.registerBlock(runeBlock, BlockLib.bRuneEssence);
                 GameRegistry.registerBlock(runeTeleporter, BlockLib.bTeleport);
                 GameRegistry.registerBlock(lamp, BlockLib.bLamp);
-                GameRegistry.registerBlock(invisibla, "invisibla");
+                GameRegistry.registerBlock(invisibla, BlockLib.bInivisbla);
 
             }
             Register=true;
