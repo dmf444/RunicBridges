@@ -353,25 +353,31 @@ public class ChunkProviderRuneEssenceMine implements IChunkProvider{
                 if (!insideChunk(a, b, x1, y1)){
                     continue;
                 }
-                if (x1 == x - basesize - 2 || x1 == x + basesize + 2 && y1 > z - basesize - 1 && y1 <= z + basesize + 2){
+                if (x1 == x - basesize - 2 || x1 == x + basesize + 2 && y1 > z - basesize && y1 < z + basesize + 1){
 
-                    setBlockInChunk(c, toC(x1), 9, toC(y1), Blocks.rail, 0x0);
+                   if (this.random.nextInt(3) == 1) {setBlockInChunk(c, toC(x1), 9, toC(y1), Blocks.rail, 0x0);}
+                    else {
+                       setBlockInChunk(c, toC(x1), 9, toC(y1), Blocks.air);
+                   }
 
                 }
                 else if (x1 == x - basesize - 2 && y1 == z - basesize - 2){
-                    setBlockInChunk(c, toC(x1), 9, toC(y1), Blocks.rail, 0x7);
+                  //  setBlockInChunk(c, toC(x1), 9, toC(y1), Blocks.rail, 0x7);
                 }
                 else if (x1 == x + basesize + 2 && y1 == z - basesize - 2){
-                    setBlockInChunk(c, toC(x1), 9, toC(y1), Blocks.rail, 0x8);
+                  //  setBlockInChunk(c, toC(x1), 9, toC(y1), Blocks.rail, 0x8);
                 }
                 else if (x1 == x + basesize + 2 && y1 == z + basesize + 2){
-                    setBlockInChunk(c, toC(x1), 9, toC(y1), Blocks.rail, 0x6);
+                   // setBlockInChunk(c, toC(x1), 9, toC(y1), Blocks.rail, 0x6);
                 }
-                else if (y1 == z - basesize - 2 || y1 == z + basesize + 2 && x1 > x - basesize - 1 && x1 <= x + basesize + 2){
-                    setBlockInChunk(c, toC(x1), 9, toC(y1), Blocks.rail, 0x1);
+                else if (y1 == z - basesize - 2 || y1 == z + basesize + 2 && x1 > x - basesize && x1 < x + basesize + 1){
+                    if (this.random.nextInt(3) == 0) {setBlockInChunk(c, toC(x1), 9, toC(y1), Blocks.rail, 0x1);}
+                    else {
+                        setBlockInChunk(c, toC(x1), 9, toC(y1), Blocks.air);
+                    }
                 }
                 else if (x1 == x - basesize - 2 && y1 == z - basesize - 2){
-                    setBlockInChunk(c, toC(x1), 9, toC(y1), Blocks.rail, 0x9);
+                   // setBlockInChunk(c, toC(x1), 9, toC(y1), Blocks.rail, 0x9);
                 }
             }
         }
