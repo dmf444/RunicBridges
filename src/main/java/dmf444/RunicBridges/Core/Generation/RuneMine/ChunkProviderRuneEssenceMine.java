@@ -21,7 +21,7 @@ import java.util.Random;
  */
 public class ChunkProviderRuneEssenceMine implements IChunkProvider{
 
-    private World worldObj;
+    public static World worldObj;
     private Random random;
 
 
@@ -247,8 +247,7 @@ public class ChunkProviderRuneEssenceMine implements IChunkProvider{
     }
 
     @Override
-    public void populate(IChunkProvider p_73153_1_, int p_73153_2_, int p_73153_3_) {
-
+    public void populate(IChunkProvider provider, int x, int z) {
     }
 
     private void setBlockInChunk(Chunk chunk, int x, int y, int z, Block b){
@@ -326,61 +325,81 @@ public class ChunkProviderRuneEssenceMine implements IChunkProvider{
             }
         }
     }
+    private void genRailSQ(int ox, int oy, Chunk c, int a, int b, int oz){
+        int radius = 9;
+        //SIDE 1
+        if(insideChunk(c.xPosition, c.zPosition, ox+radius, oy-2)){
+            for(int i=0; i<8; i++){
+                setBlockInChunk(c, toC(ox+radius), oz, toC(oy-1-i), Blocks.rail, 0);
+                //setBlockInChunk(c, toC(ox+radius), oz, toC(oy+i), Blocks.rail, 0);
+            }
+            setBlockInChunk(c, toC(ox+radius), oz, toC(oy-1-8), Blocks.rail, 7);
+            for(int d=0; d<10;d++){
+                setBlockInChunk(c, toC(ox-radius-8+d), oz, toC(oy+7), Blocks.rail, 1);
+            }
+        }
+
+        if(insideChunk(c.xPosition, c.zPosition, ox+radius, oy)){
+            for(int i=0; i<10; i++){
+                setBlockInChunk(c, toC(ox+radius), oz, toC(oy-1+i), Blocks.rail, 0);
+                //setBlockInChunk(c, toC(ox+radius), oz, toC(oy+i), Blocks.rail, 0);
+            }
+            setBlockInChunk(c, toC(ox+radius), oz, toC(oy+9), Blocks.rail, 8);
+            for(int d=0; d<10;d++){
+                setBlockInChunk(c, toC(ox-radius-8+d), oz, toC(oy+9), Blocks.rail, 1);
+            }
+        }
+
+        //SIDE 2
+        if(insideChunk(c.xPosition, c.zPosition, ox-radius, oy-2)){
+            for(int i=0; i<8; i++){
+                setBlockInChunk(c, toC(ox-radius), oz, toC(oy-1-i), Blocks.rail, 0);
+                //setBlockInChunk(c, toC(ox+radius), oz, toC(oy+i), Blocks.rail, 0);
+            }
+            setBlockInChunk(c, toC(ox-radius), oz, toC(oy-1-8), Blocks.rail, 6);
+            for(int d=0; d<7;d++){
+                setBlockInChunk(c, toC(ox-radius+1+d), oz, toC(oy+7), Blocks.rail, 1);
+            }
+        }
+
+        if(insideChunk(c.xPosition, c.zPosition, ox-radius, oy)){
+            for(int i=0; i<10; i++){
+                setBlockInChunk(c, toC(ox-radius), oz, toC(oy-1+i), Blocks.rail, 0);
+                //setBlockInChunk(c, toC(ox+radius), oz, toC(oy+i), Blocks.rail, 0);
+            }
+            setBlockInChunk(c, toC(ox-radius), oz, toC(oy+9), Blocks.rail, 9);
+            for(int d=0; d<7;d++){
+                setBlockInChunk(c, toC(ox-radius+1+d), oz, toC(oy+9), Blocks.rail, 1);
+            }
+        }
+
+
+
+
+    }
     private void genMound(Chunk c, int a, int b, int x, int z, int basesize, int maxheight){
         int maxup = Math.min(maxheight / 4, 9);
         int up = 0;
         int size = basesize;
         int height = 8;
-        while (height < maxheight){
+        while (height < maxheight) {
             up += 1;
             height += 1;
-            if (up == maxup){
+            if (up == maxup) {
                 up = 0;
                 maxup -= 1;
                 size -= 1;
-                if (size < 2){
+                if (size < 2) {
                     size = 2;
                 }
-                if (maxup < 2){
+                if (maxup < 2) {
                     maxup = 2;
                 }
             }
             genCircle(x, z, size, c, a, b, height);
-
+            //genRailSQ(x, z, c, a, b, height);
         }
-        for (int x1 = x - basesize - 2; x1 < x + basesize + 3; x1++){
-            for (int y1 = z - basesize - 2; y1 < z + basesize + 3; y1 ++){
-                if (!insideChunk(a, b, x1, y1)){
-                    continue;
-                }
-                if (x1 == x - basesize - 2 || x1 == x + basesize + 2 && y1 > z - basesize && y1 < z + basesize + 1){
 
-                   if (this.random.nextInt(3) == 1) {setBlockInChunk(c, toC(x1), 9, toC(y1), Blocks.rail, 0x0);}
-                    else {
-                       setBlockInChunk(c, toC(x1), 9, toC(y1), Blocks.air);
-                   }
-
-                }
-                else if (x1 == x - basesize - 2 && y1 == z - basesize - 2){
-                  //  setBlockInChunk(c, toC(x1), 9, toC(y1), Blocks.rail, 0x7);
-                }
-                else if (x1 == x + basesize + 2 && y1 == z - basesize - 2){
-                  //  setBlockInChunk(c, toC(x1), 9, toC(y1), Blocks.rail, 0x8);
-                }
-                else if (x1 == x + basesize + 2 && y1 == z + basesize + 2){
-                   // setBlockInChunk(c, toC(x1), 9, toC(y1), Blocks.rail, 0x6);
-                }
-                else if (y1 == z - basesize - 2 || y1 == z + basesize + 2 && x1 > x - basesize && x1 < x + basesize + 1){
-                    if (this.random.nextInt(3) == 0) {setBlockInChunk(c, toC(x1), 9, toC(y1), Blocks.rail, 0x1);}
-                    else {
-                        setBlockInChunk(c, toC(x1), 9, toC(y1), Blocks.air);
-                    }
-                }
-                else if (x1 == x - basesize - 2 && y1 == z - basesize - 2){
-                   // setBlockInChunk(c, toC(x1), 9, toC(y1), Blocks.rail, 0x9);
-                }
-            }
-        }
     }
 
 
@@ -473,9 +492,13 @@ public class ChunkProviderRuneEssenceMine implements IChunkProvider{
         drawCorridor(true, -65, -58, 19, -29, chunk, p_73154_1_, p_73154_2_);
 
         genMound(chunk, p_73154_1_, p_73154_2_, -47, -47, 7, 31);
+        GenRails.genRailSQ1(-47, -47, chunk, p_73154_1_, p_73154_2_, 9);
         genMound(chunk, p_73154_1_, p_73154_2_, 63, 63, 7, 31);
+        GenRails.genRailSQ3(63, 63, chunk, p_73154_1_, p_73154_2_, 9);
         genMound(chunk, p_73154_1_, p_73154_2_, 63, -47, 7, 31);
+        GenRails.genRailSQ2(63, -47, chunk, p_73154_1_, p_73154_2_, 9);
         genMound(chunk, p_73154_1_, p_73154_2_, -47, 63, 7, 31);
+        GenRails.genRailSQ4(-47, 63, chunk, p_73154_1_, p_73154_2_, 9);
     }
 
 
