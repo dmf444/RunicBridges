@@ -199,7 +199,7 @@ public class GenRails {
             for (int i = 0; i < 8; i++) {
                 setBlockInChunk(c, toC(ox - radius), oz, toC(oy + 1 + i), Blocks.rail, 0);
             }
-            setBlockInChunk(c, toC(ox - radius), oz, toC(oy + 9), Blocks.rail, 9);
+            setBlockInChunk(c, toC(ox - radius), oz, toC(oy + 9), Blocks.rail, 9); //
             for (int d = 0; d < 9; d++) {
                 setBlockInChunk(c, toC(ox - radius +1 + d), oz, toC(oy + radius), Blocks.rail, 1);
             }
