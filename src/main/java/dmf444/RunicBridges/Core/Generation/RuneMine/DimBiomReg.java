@@ -1,8 +1,10 @@
 package dmf444.RunicBridges.Core.Generation.RuneMine;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.event.world.WorldEvent;
 
 /**
  * Created by mincrmatt12. Do not copy this or you will have to face
@@ -19,6 +21,16 @@ public class DimBiomReg {
     public static void registerDimension(){
         DimensionManager.registerProviderType(-4412, WorldProviderRuneEssence.class, true);
         DimensionManager.registerDimension(-4412, -4412);
+    }
+
+
+    @SubscribeEvent
+    public void makeErSnow(WorldEvent.Load e){
+        if(e.world.provider.dimensionId == -4412){
+            if(!e.world.isRaining()){
+                e.world.setRainStrength(1.0F);
+            }
+        }
     }
 
 }

@@ -14,6 +14,6 @@ public class BiomeGenMine extends BiomeGenBase {
         super(par1);
         this.setBiomeName("RuneEssenceMine");
         this.spawnableMonsterList = new ArrayList<>();
-
+        this.enableSnow = true;
     }
 }

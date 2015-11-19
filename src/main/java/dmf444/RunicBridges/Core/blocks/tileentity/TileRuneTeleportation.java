@@ -1,6 +1,7 @@
 package dmf444.RunicBridges.Core.blocks.tileentity;
 
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.DimensionManager;
 
 /**
  * Created by David on 2015-10-22.

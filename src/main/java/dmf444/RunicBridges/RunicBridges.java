@@ -42,6 +42,7 @@ public class RunicBridges
         PacketManager.init();
         GameRegistry.registerWorldGenerator(new RunicGenerationManager(), 2);
         MinecraftForge.EVENT_BUS.register(new BlockBrokenRuneEssence());
+        MinecraftForge.EVENT_BUS.register(new DimBiomReg());
 
     }
 
