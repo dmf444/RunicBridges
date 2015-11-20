@@ -14,7 +14,7 @@ public class WorldProviderRuneEssence extends WorldProvider{
 
     @Override
     protected void registerWorldChunkManager() {
-        this.worldChunkMgr = new WorldChunkManagerHell(DimBiomReg.biome, 0f);
+        this.worldChunkMgr = new WorldChunkManagerHell(DimBiomReg.biome, 500f);
         this.dimensionId = -4412;
 
 

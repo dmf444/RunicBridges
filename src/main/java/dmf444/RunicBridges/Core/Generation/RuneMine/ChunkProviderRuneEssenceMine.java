@@ -254,6 +254,8 @@ public class ChunkProviderRuneEssenceMine implements IChunkProvider{
         setBlockInChunk(chunk, x, y, z, b, 0);
     }
     private void setBlockInChunk(Chunk chunk, int x, int y, int z, Block b, int meta){
+        x = toC(x);
+        z = toC(z);
         int l;
         l = y >> 4;
         ExtendedBlockStorage e = chunk.getBlockStorageArray()[l];
@@ -492,20 +494,73 @@ public class ChunkProviderRuneEssenceMine implements IChunkProvider{
         drawCorridor(true, -65, -58, 19, -29, chunk, p_73154_1_, p_73154_2_);
 
         genMound(chunk, p_73154_1_, p_73154_2_, -47, -47, 7, 31);
-        GenRails.genRailSQ1(-47, -47, chunk, p_73154_1_, p_73154_2_, 9);
+        genRails(chunk, p_73154_1_, p_73154_2_, -47, -47);
+       // GenRails.genRailSQ1(-47, -47, chunk, p_73154_1_, p_73154_2_, 9);
         genMound(chunk, p_73154_1_, p_73154_2_, 63, 63, 7, 31);
-        GenRails.genRailSQ3(63, 63, chunk, p_73154_1_, p_73154_2_, 9);
+       genRails(chunk, p_73154_1_, p_73154_2_, 63, 63);
         genMound(chunk, p_73154_1_, p_73154_2_, 63, -47, 7, 31);
-        GenRails.genRailSQ2(63, -47, chunk, p_73154_1_, p_73154_2_, 9);
+        genRails(chunk, p_73154_1_, p_73154_2_, 63, -47);
         genMound(chunk, p_73154_1_, p_73154_2_, -47, 63, 7, 31);
-        GenRails.genRailSQ4(-47, 63, chunk, p_73154_1_, p_73154_2_, 9);
+        genRails(chunk, p_73154_1_, p_73154_2_, -47, 63);
     }
 
 
     // generates wall things. use x
 
 
+    public void genRails(Chunk c, int a, int b, int x, int y){
 
+        // +x east
+        // -x west
+        // +z south
+        // -z north
+        int X;
+        int Z;
+        for (X = x-8; X < x+9; X++){
+            Z = y-9;
+
+            if (insideChunk(a, b, X, Z)){
+                setBlockInChunk(c, X, 9, Z, Blocks.rail, 1);
+            }
+
+            Z = y+9;
+
+            if (insideChunk(a, b, X, Z)){
+                setBlockInChunk(c, X, 9, Z, Blocks.rail, 1);
+            }
+        }
+        X = x - 9;
+        Z = y - 9;
+        if (insideChunk(a, b, X, Z)){
+            setBlockInChunk(c, X, 9, Z, Blocks.rail, 6);
+        }
+        X = x + 9;
+        if (insideChunk(a, b, X, Z)){
+            setBlockInChunk(c, X, 9, Z, Blocks.rail, 7);
+        }
+        for (Z = y-8; Z < y+9; Z++){
+            X = x-9;
+
+            if (insideChunk(a, b, X, Z)){
+                setBlockInChunk(c, X, 9, Z, Blocks.rail, 0);
+            }
+
+            X = x+9;
+
+            if (insideChunk(a, b, X, Z)){
+                setBlockInChunk(c, X, 9, Z, Blocks.rail, 0);
+            }
+        }
+        X = x - 9;
+        Z = y + 9;
+        if (insideChunk(a, b, X, Z)){
+            setBlockInChunk(c, X, 9, Z, Blocks.rail, 9);
+        }
+        X = x + 9;
+        if (insideChunk(a, b, X, Z)){
+            setBlockInChunk(c, X, 9, Z, Blocks.rail, 8);
+        }
+    }
 
     @Override
     public boolean saveChunks(boolean p_73151_1_, IProgressUpdate p_73151_2_) {
